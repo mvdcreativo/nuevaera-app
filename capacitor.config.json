@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "nueva-era-app",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}
