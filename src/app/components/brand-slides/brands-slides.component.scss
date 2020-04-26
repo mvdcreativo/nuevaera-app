@@ -1,0 +1,26 @@
+ion-slides{
+    ion-slide{
+    
+        height: 130px;
+        
+        ion-card{
+            height: 100%;
+            display: grid;
+            grid-template-rows: 100%;
+            color: #000000;
+            background: #ffffff;
+            ion-img{
+                height: 100%;
+                object-fit: contain;
+
+                
+            }
+            ion-card-content{
+                // height: 60px;
+                // margin-top: -60px;
+                
+                // background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(255,255,255,0) 100%);
+            }
+        }
+    }
+}

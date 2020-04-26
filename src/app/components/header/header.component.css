@@ -1,0 +1,8 @@
+ion-toolbar {
+  --background: #ffe20d;
+  --color: #000000;
+  --border-style: none;
+}
+ion-toolbar ion-searchbar {
+  --background: #ffffff;
+}

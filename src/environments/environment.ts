@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API : "https://api.nuevaerauruguay.com/api/",
+  AuthAPI: 'https://api.nuevaerauruguay.com/api/auth/',
+  urlPago: 'https://api.nuevaerauruguay.com/mercado-pago',
+  urlFiles: 'https://api.nuevaerauruguay.com/storage/',
+
+  // API : "http://apinuevaera.test/api/",
+  // AuthAPI: 'http://apinuevaera.test/api/auth/',
+  // urlPago: 'http://apinuevaera.test/mercado-pago',
+  // urlFiles: 'http://apinuevaera.test/storage/',
 };
 
 /*

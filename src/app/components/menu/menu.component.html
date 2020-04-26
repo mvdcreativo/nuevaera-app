@@ -1,0 +1,17 @@
+<ion-menu side="start" menuId="principal" contentId="main">
+  <ion-header>
+    <ion-toolbar color="principal">
+      <ion-title>Start Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list >
+      <ion-item lines="none" inset="true" *ngFor="let item of itemsCategory | async" detail>
+        <mat-icon slot="start" [svgIcon]="item.slug"></mat-icon>
+        <ion-label>{{ item.name }}</ion-label>
+        
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+</ion-menu>

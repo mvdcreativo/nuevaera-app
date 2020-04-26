@@ -1,0 +1,14 @@
+ion-slides ion-slide {
+  height: 200px;
+}
+ion-slides ion-slide ion-card {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 60% 40%;
+  color: #000000;
+  background: #ffffff;
+}
+ion-slides ion-slide ion-card ion-img {
+  height: 100%;
+  object-fit: contain;
+}

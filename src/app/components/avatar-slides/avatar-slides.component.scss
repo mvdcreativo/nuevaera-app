@@ -1,0 +1,34 @@
+ion-slides {
+   
+
+}
+ion-slide{
+    height: 100%;
+    display: flex;
+    justify-items: center!important;
+    justify-content: center!important;
+    flex-direction: column;
+    span{
+        display: flex;
+        justify-items: center!important;
+        justify-content: center!important;
+        width: 100%;
+        font-size: 14px;
+    }
+}
+.swiper-slide {
+    // padding: 1rem;
+}
+ion-avatar{
+
+    border: 1px solid #ffffff;
+    display: flex;
+    align-items: center;
+
+    ion-img{
+        width: 80%;
+        height: 80%;
+        object-fit: contain;
+        // object-position: center center;
+    }
+} 

@@ -1,0 +1,29 @@
+<ion-app>
+  <header-component></header-component>
+  
+  <ion-content>
+    <div class="row"  *ngIf="banner_slides">
+      <banner-slides [slides]="banner_slides"></banner-slides>
+    </div>
+
+    <div class="row" *ngIf="itemAvatarSlides">
+      <avatar-slides [slides]="itemAvatarSlides"></avatar-slides>
+    </div>
+
+    <div class="row" *ngIf="productsPromocion">
+      <p>Productos en Promoción</p>
+      <ofers-slides [slides]="productsPromocion"  [configSlide]= "configSlide"></ofers-slides>
+    </div>
+
+    <div class="row" *ngIf="brands">
+      <p>Marcas</p>
+      <brands-slides [slides]="brands | slice:0:8"  [configSlide]= "configSlideBrand"></brands-slides>
+    </div>
+    
+    <div class="row">
+      <p>Productos Populares</p>
+      <list-product [products]="productsPopular | slice:0:50"></list-product>
+    </div>
+
+  </ion-content>
+</ion-app>

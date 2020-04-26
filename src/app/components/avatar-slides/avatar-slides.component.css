@@ -1,0 +1,24 @@
+ion-slide {
+  height: 100%;
+  display: flex;
+  justify-items: center !important;
+  justify-content: center !important;
+  flex-direction: column;
+}
+ion-slide span {
+  display: flex;
+  justify-items: center !important;
+  justify-content: center !important;
+  width: 100%;
+  font-size: 14px;
+}
+ion-avatar {
+  border: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+}
+ion-avatar ion-img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
