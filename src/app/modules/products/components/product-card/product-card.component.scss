@@ -1,13 +1,38 @@
-ion-card{
-    --background: #ffffff;
-    margin: 0.5rem;
-    width: calc( 50% - 1rem);
-    float: left;
+// ion-card{
+//     --background: #ffffff;
+//     margin: 0.5rem;
+//     width: calc( 50% - 1rem);
+//     float: left;
+// }
+// ion-card-title{
+//     font-size: 16px;
+//     font-weight: 400;
+// }
+// ion-card-content{
+//     .price{
+//         font-size: 18px;
+//         font-weight: 800;
+//         float: right;
+//     }
+// }
+
+
+
+ion-thumbnail{
+    --border-radius: 10px;
+    --size: 30px
+
 }
-ion-card-title{
-    font-size: 16px;
-    font-weight: 400;
+
+.title, .price{
+    font-size: 14px;
 }
-ion-card-content{
-    
+.price{
+    color: #3dc2ff!important;
+    width: 80%;
+}
+.actions{
+    float: right;
+    margin-top: -30px;
+    font-size: 12px;
 }

@@ -24,3 +24,44 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+@font-face{
+    font-family: Nunito;
+    src : url('assets/fonts/Nunito-Regular.ttf')
+}
+@font-face{
+    font-family: Nunito-Light;
+    src : url('assets/fonts/Nunito-Light.ttf')
+}
+@font-face{
+    font-family: Nunito-Bold;
+    src : url('assets/fonts/Nunito-Bold.ttf')
+}
+*{
+    font-family: Nunito;
+}
+.title, .price{
+    font-family: Nunito-Bold;
+}
+
+ion-card-title{
+    font-size: 20px;
+}
+ion-card{
+    box-shadow: none;
+}
+
+
+//SNACK_BARR COLORES
+
+.toastSuccess{
+    background-color:  #42a847;
+    color: #ffffff;
+}
+.toastWarn{
+    background-color: #bc5100;
+}
+.toastError{
+    background-color:  #d50000;
+}

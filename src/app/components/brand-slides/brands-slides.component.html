@@ -1,5 +1,5 @@
 <ion-slides mode="ios" pager="ios" [options]="configSlide">
-  <ion-slide *ngFor="let slide of slides">
+  <ion-slide *ngFor="let slide of slides" (click)="onClickLink(slide.id)">
     <ion-card>
       <ion-img [src]="urlFiles+slide.image_url"></ion-img>
       <!-- <ion-card-content>

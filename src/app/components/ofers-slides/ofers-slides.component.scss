@@ -1,7 +1,8 @@
 ion-slides{
     ion-slide{
-    
-        height: 200px;
+    // border-radius: 10px;
+    // border: 1px solid #dddddd;
+    padding-left: 5px;
         ion-card{
             height: 100%;
             display: grid;
@@ -22,4 +23,28 @@ ion-slides{
             }
         }
     }
+}
+
+
+.title, .price, p{
+    font-size: 14px;
+    padding-left: 1rem;
+}
+.title{
+    font-size: 12px;
+    color: #000000;
+}
+ion-thumbnail{
+    height: 80px;
+    width: 80px;
+    --border-radius: 10px;
+    margin-top:5px;
+    margin-bottom: 5px;
+}
+
+ion-item{
+    --border-radius:10px;
+    --border-color: #ebebeb;
+    --border-style: solid;
+    --border-width:1px;
 }

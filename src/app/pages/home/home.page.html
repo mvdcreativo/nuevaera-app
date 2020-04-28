@@ -1,5 +1,5 @@
-<ion-app>
-  <header-component></header-component>
+
+  <header-component [backButton]="false"> </header-component>
   
   <ion-content>
     <div class="row"  *ngIf="banner_slides">
@@ -11,19 +11,19 @@
     </div>
 
     <div class="row" *ngIf="productsPromocion">
-      <p>Productos en Promoción</p>
+      <p class="title">Productos en Promoción</p>
       <ofers-slides [slides]="productsPromocion"  [configSlide]= "configSlide"></ofers-slides>
     </div>
 
     <div class="row" *ngIf="brands">
-      <p>Marcas</p>
+      <p class="title">Marcas</p>
       <brands-slides [slides]="brands | slice:0:8"  [configSlide]= "configSlideBrand"></brands-slides>
     </div>
     
     <div class="row">
-      <p>Productos Populares</p>
+      <p class="title">Productos Populares</p>
       <list-product [products]="productsPopular | slice:0:50"></list-product>
     </div>
 
   </ion-content>
-</ion-app>
+

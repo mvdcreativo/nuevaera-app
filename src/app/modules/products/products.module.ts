@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ListProductComponent } from './components/list-product/list-product.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { IonicModule } from '@ionic/angular';
+import { MaterialModule } from 'src/app/material/material.module';
 
 
 
@@ -13,7 +14,8 @@ import { IonicModule } from '@ionic/angular';
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    MaterialModule
   ],
   exports: [
     ListProductComponent

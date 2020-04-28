@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+import { Product } from 'src/app/interfaces/product';
+import { CartService } from 'src/app/modules/payment/services/cart.service';
 
 @Component({
   selector: 'product-card',
@@ -8,12 +11,27 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductCardComponent implements OnInit {
 
-@Input() data;
+  @Input() data;
 
-public urlFiles: string = environment.urlFiles;
+  public urlFiles: string = environment.urlFiles;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private cartService: CartService
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
+
+  onClick(id) {
+    this.router.navigate(['/product-detail', id])
+  }
+
+
+  // Add to cart
+  public addToCart(product: Product, quantity: number = 1) {
+
+    this.cartService.addToCart(product, quantity);
+    console.log(product, quantity);
+  }
 }

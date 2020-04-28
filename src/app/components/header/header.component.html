@@ -1,7 +1,13 @@
 <ion-header mode="ios">
   <ion-toolbar class="ion-margin-top ion-align-items-center">
-    <ion-menu-button menu="principal" slot="start"></ion-menu-button>
-    <ion-searchbar placeholder="Buscar" showCancelButton="focus" cancelButtonText="cancelar" animated ></ion-searchbar>
-    <cart-button slot="end" class="cart-button" ></cart-button>
+
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="backButton" defaultHref="home" text="atrás"></ion-back-button>
+      <ion-menu-button menu="principal" slot="start"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-searchbar placeholder="Buscar" showCancelButton="focus" cancelButtonText="cancelar" animated>
+    </ion-searchbar>
+    <cart-button [itemsCart]="carItems" slot="end" class="cart-button"></cart-button>
   </ion-toolbar>
 </ion-header>

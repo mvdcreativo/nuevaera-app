@@ -3,6 +3,7 @@ import { MenuController } from '@ionic/angular';
 import { MenuService } from './services/menu.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'menu-principal',
@@ -16,8 +17,8 @@ export class MenuComponent implements OnInit {
     private menu: MenuController,
     private menuService: MenuService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer
-
+    private domSanitizer: DomSanitizer,
+    private route : Router
   ) { 
     this.matIconRegistry.addSvgIcon(
       "alimento-perro",
@@ -48,6 +49,13 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.itemsCategory = this.menuService.categories()
 
+  }
+
+
+
+  onClickLink(item){
+    this.route.navigate(["/list", item])
+    this.menu.close()
   }
 
 

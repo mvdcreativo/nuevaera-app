@@ -1,0 +1,45 @@
+@import url(~@ionic/angular/css/core.css);
+@import url(~@ionic/angular/css/normalize.css);
+@import url(~@ionic/angular/css/structure.css);
+@import url(~@ionic/angular/css/typography.css);
+@import url(~@ionic/angular/css/display.css);
+@import url(~@ionic/angular/css/padding.css);
+@import url(~@ionic/angular/css/float-elements.css);
+@import url(~@ionic/angular/css/text-alignment.css);
+@import url(~@ionic/angular/css/text-transformation.css);
+@import url(~@ionic/angular/css/flex-utils.css);
+@font-face {
+  font-family: Nunito;
+  src: url("assets/fonts/Nunito-Regular.ttf");
+}
+@font-face {
+  font-family: Nunito-Light;
+  src: url("assets/fonts/Nunito-Light.ttf");
+}
+@font-face {
+  font-family: Nunito-Bold;
+  src: url("assets/fonts/Nunito-Bold.ttf");
+}
+* {
+  font-family: Nunito;
+}
+.title,
+.price {
+  font-family: Nunito-Bold;
+}
+ion-card-title {
+  font-size: 20px;
+}
+ion-card {
+  box-shadow: none;
+}
+.toastSuccess {
+  background-color: #42a847;
+  color: #ffffff;
+}
+.toastWarn {
+  background-color: #bc5100;
+}
+.toastError {
+  background-color: #d50000;
+}

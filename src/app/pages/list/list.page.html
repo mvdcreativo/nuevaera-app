@@ -1,0 +1,22 @@
+
+
+  <header-component></header-component>
+
+
+  <ion-content>
+    <list-product [products]="products"></list-product>
+
+    <div class="inf-scroll">
+      
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content 
+          
+          loadingSpinner="dots"
+          loadingText="Cargando...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+    </div>
+
+  </ion-content>
+
+

@@ -1,8 +1,15 @@
-.img-content {
-  --height: 150px;
-}
-.img-content img {
-  --height: 100%;
+img {
+  width: 100%;
+  border-radius: 10px;
   object-fit: cover;
   object-position: center;
+  max-height: 300px;
+}
+ion-slide {
+  padding: 1rem;
+  display: flex;
+  justify-items: center !important;
+  justify-content: center !important;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }

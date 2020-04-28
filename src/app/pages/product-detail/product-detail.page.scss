@@ -1,0 +1,28 @@
+.img-content{
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    .img-card{
+        max-width: 500px;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+}
+.price{
+    font-size: 24px;
+    color: #3dc2ff;
+    float: right;
+    text-align: right;
+}
+.title{
+    font-size: 24px;
+}
+.card-content{
+    display: flex;
+    flex-direction: column;
+}

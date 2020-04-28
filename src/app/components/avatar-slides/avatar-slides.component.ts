@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AvatarSlides } from './Interface/avatar-slides';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'avatar-slides',
@@ -10,7 +11,9 @@ export class AvatarSlidesComponent implements OnInit {
   @Input() slides: AvatarSlides;
 
 
-  constructor() { }
+  constructor(
+    private route: Router
+  ) { }
 
   ngOnInit() { }
 
@@ -19,6 +22,10 @@ export class AvatarSlidesComponent implements OnInit {
     spaceBetween: 10,
     centeredSlides: false,
     pagination: false
+  }
+
+  onClickLink(item){
+    this.route.navigate(["/list", item])
   }
 
 }

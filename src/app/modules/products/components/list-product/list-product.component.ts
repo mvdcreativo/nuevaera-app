@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from 'src/app/interfaces/product';
 
 @Component({
@@ -8,8 +8,13 @@ import { Product } from 'src/app/interfaces/product';
 })
 export class ListProductComponent implements OnInit {
 @Input() products: Product[]
+
+
   constructor() { }
 
   ngOnInit() {}
+
+
+
 
 }

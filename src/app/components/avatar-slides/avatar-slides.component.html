@@ -1,5 +1,5 @@
 <ion-slides mode="ios" pager="ios"  [options]="configSlide">
-  <ion-slide *ngFor="let slide of slides" class="avatar-slide">
+  <ion-slide *ngFor="let slide of slides" class="avatar-slide" (click)="onClickLink(slide.id)">
     <span class="">
       <ion-avatar class="ion-justify-content-center">
         <ion-img [src]="slide.src_image"></ion-img>

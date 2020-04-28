@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Product } from 'src/app/interfaces/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'brands-slides',
@@ -17,11 +18,16 @@ export class BrandsSlidesComponent implements OnInit {
 
   
 
-  constructor() { }
+  constructor(
+    private route: Router
+  ) { }
 
   ngOnInit() 
   {
   }
 
+  onClickLink(item){
+    this.route.navigate(["/list", "marca", item])
+  }
 
 }

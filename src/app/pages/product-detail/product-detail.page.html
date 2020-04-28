@@ -1,0 +1,35 @@
+
+  <header-component></header-component>
+
+
+  <ion-content *ngIf="product" >
+    <div class="img-content">
+      <img class="img-card" [src]="urlFiles+product.picture">
+
+    </div>
+    <ion-card color="light">
+      <ion-card-header class="ion-no-padding ion-padding-bottom">
+        <ion-card-title  class="title">{{ product.name }} </ion-card-title>
+        <ion-card-subtitle>{{ product.brand.name }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="card-content ion-no-padding ion-padding-bottom">
+
+        <p class="price ion-padding-bottom">$ {{ product.price }}</p>
+
+        <ion-buttons class="actions ion-padding-bottom">
+          <ion-chip color="warning" (click)="addToCart(product)">
+            <mat-icon class="material-icons-round">add_shopping_cart</mat-icon>
+            <ion-label>Carrito</ion-label>
+          </ion-chip>
+          <ion-chip color="primary" (click)="addToCart(product)">
+            <mat-icon class="material-icons-round">add_shopping_cart</mat-icon>
+            <ion-label>Comprar ahora</ion-label>
+          </ion-chip>
+        </ion-buttons>
+
+      <ion-card-subtitle>Descripción</ion-card-subtitle>  
+        {{ product.description }}
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+

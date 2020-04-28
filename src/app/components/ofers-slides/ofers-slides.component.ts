@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Product } from 'src/app/interfaces/product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ofers-slides',
@@ -17,11 +18,15 @@ export class OfersSlidesComponent implements OnInit {
 
   
 
-  constructor() { }
+  constructor(
+    private router : Router
+  ) { }
 
   ngOnInit() 
   {
   }
-
+  onClick(id){
+    this.router.navigate(['/product-detail' , id])
+  }
 
 }

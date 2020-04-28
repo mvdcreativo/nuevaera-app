@@ -1,11 +1,30 @@
-<ion-card mode="ios">
+<!-- <ion-card mode="ios" (click)="onClick(data.id)" >
   <ion-img [src]="urlFiles+data.picture"></ion-img>
   <ion-card-header>
-    <ion-card-subtitle>{{ data.brand.name }}</ion-card-subtitle>
+    <ion-card-subtitle *ngIf="data.brand">{{ data.brand.name }}</ion-card-subtitle>
     <ion-card-title>{{ data.name }}</ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    <p>$U {{ data.price }}</p>
-    
+    <p class="price">$U {{ data.price }}</p>
+  
   </ion-card-content>
-</ion-card>
+</ion-card> -->
+
+    <ion-item color="light" type="button" button="true" >
+      <ion-thumbnail slot="start"  (click)="onClick(data.id)" detail >
+        <ion-img [src]="urlFiles+data.picture"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <p class="title"  (click)="onClick(data.id)">{{ data.name }}</p>
+        <p *ngIf="data.brand">{{ data.brand.name }}</p>
+        <p class="price"  (click)="onClick(data.id)">$U {{ data.price }}</p>
+        <ion-buttons class="actions">
+          <ion-chip color="warning" (click)="addToCart(data)">
+            <mat-icon class="material-icons-round">add_shopping_cart</mat-icon>
+            <!-- <ion-label>Default</ion-label> -->
+          </ion-chip>
+        </ion-buttons>
+      </ion-label>
+      
+    </ion-item>
+

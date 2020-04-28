@@ -11,7 +11,7 @@ export class Product {
     description?: string;
     stock?: number;
     newPro?: boolean;
-    brand?: string;
+    brand?: Brand;
     sale?: boolean;
     category?: Category;
     brand_id?:number;

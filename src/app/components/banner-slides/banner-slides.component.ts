@@ -17,8 +17,9 @@ export class BannerSlidesComponent implements OnInit {
 
   configSlide = {
     slidesPerView: 1,
-    spaceBetween: 5,
+    spaceBetween: 10,
     centeredSlides: true,
-    pagination: false
+    pagination: false,
+
   }
 }

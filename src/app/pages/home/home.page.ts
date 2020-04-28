@@ -61,7 +61,7 @@ export class HomePage implements OnInit {
     this.menuServices.categories().pipe(take(1)).subscribe(res=>{ 
       const avatar_slides = res
       this.itemAvatarSlides = avatar_slides.map( v => {
-        return {title:v.name, src_image: `../../../assets/images/${v.slug}.svg`}
+        return {id:v.id, title:v.name, src_image: `../../../assets/images/${v.slug}.svg`}
       })
       console.log(this.itemAvatarSlides);
       
@@ -79,7 +79,7 @@ export class HomePage implements OnInit {
           x => x.category.id === 13
         )
         // this.productsPopular = product.sort((a, b)=>{ return a.visits - b.visits})
-        this.productsPopular = product;
+        this.productsPopular = product.splice(0,10);
 
         // console.log(this.productsPromocion);
         
@@ -87,8 +87,8 @@ export class HomePage implements OnInit {
     )
   }
   configSlide = {
-    slidesPerView: 1.8,
-    // spaceBetween: 5,
+    slidesPerView: 1.2,
+    spaceBetween: 5,
     // centeredSlides: false,
     pagination: false
   }
@@ -106,9 +106,10 @@ export class HomePage implements OnInit {
     )
      
   }
+  
   configSlideBrand = {
-    slidesPerView: 2.5,
-    // spaceBetween: 5,
+    slidesPerView: 3.5,
+    spaceBetween: 10,
     // centeredSlides: false,
     pagination: false
   }
