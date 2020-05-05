@@ -1,0 +1,77 @@
+<header-component> </header-component>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-title>Datos de envío</ion-title>
+
+    </ion-list-header>
+    <form [formGroup]="formOrder" (ngSubmit)="onSubmit()">
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="name" placeholder="Nombre" class="input" type="text" autocorrect="off"
+          clear-input="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="lastname" placeholder="Apellido" class="input" type="text" autocorrect="off"
+          clear-input="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="ci" placeholder="Documento" class="input" type="text" autocorrect="off"
+          clear-input="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="company" placeholder="Empresa (opcional)" class="input" type="text" autocorrect="off"
+          clear-input="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="rut" placeholder="RUT (opcional)" class="input" type="text" autocorrect="off"
+          clear-input="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="address" placeholder="Dirección" class="input" type="text" autocorrect="off"
+          clear-input="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="city" placeholder="Ciudad" class="input" type="text" autocorrect="off"
+          clear-input="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="state" placeholder="Departamento" class="input" type="text" autocorrect="off"
+          clear-input="true">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="phone" placeholder="Celular" class="input" type="text" autocorrect="off">
+        </ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="email" placeholder="Correo Electrónico" type="email" class="input"
+          autocomplete="off" autocorrect="off" clear-input="true">
+        </ion-input>
+      </ion-item>
+
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-button shape="round" type="submit" color="warning">Pagar</ion-button>
+      </ion-item>
+
+    </form>
+  </ion-list>
+</ion-content>

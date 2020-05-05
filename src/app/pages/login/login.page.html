@@ -1,0 +1,42 @@
+<header-component></header-component>
+
+
+<ion-content mode="ios">
+  <ion-list>
+    <ion-item lines="none" class="ion-margin logo">
+      <ion-img src="../../assets/logo.png"></ion-img>
+    </ion-item>
+
+    <ion-list-header>
+      <ion-title>Entrar</ion-title>
+
+    </ion-list-header>
+
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmitLogin()">
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="email" type="email" placeholder="Correo Electrónico" class="input" autocorrect="off" clear-input="true">
+        </ion-input>
+      </ion-item>
+      
+      <ion-item lines="none" class="ion-margin">
+        <ion-input formControlName="password"  type="password" placeholder="Contraseña" class="input"></ion-input>
+      </ion-item>
+
+      <mat-error  lines="none">
+        <label *ngIf="errorLogin">{{ errorLogin | async }}</label>
+      </mat-error>
+
+      <ion-item lines="none" class="ion-margin">
+        <ion-button shape="round"  type="submit" color="warning">Entrar</ion-button>
+      </ion-item>
+      
+      <ion-item lines="none" class="ion-margin center">
+        <ion-label><a [routerLink]="['/register']" class="register">Olvidé mi contraseña</a></ion-label>
+      </ion-item>
+      <ion-item lines="none" class="ion-margin center">
+        <ion-label><ion-chip color="warning" [routerLink]="['/register']">Registrarme</ion-chip></ion-label>
+      </ion-item>
+      
+    </form>
+    </ion-list>
+  </ion-content>

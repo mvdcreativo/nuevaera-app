@@ -1,53 +1,58 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map } from 'rxjs/operators';
 import { Observable, BehaviorSubject, Subscriber } from 'rxjs';
 import { CartItem } from '../interfaces/cart-item';
 import { Product } from 'src/app/interfaces/product';
+import { getStorage, setStorage, removeStorage } from "src/app/shared/storage/services/storage.service";
 
-import { Plugins } from '@capacitor/core';
-const { Storage } = Plugins;
-
-
-declare let fbq:Function;
 
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
-// Get product from Localstorage
- products 
+export class CartService implements OnInit {
+
 // Array
-public cartItems  :  BehaviorSubject<CartItem[]> = new BehaviorSubject([]);
+public cartItems  :  BehaviorSubject<CartItem[]> = new BehaviorSubject([]) 
 public observer   :  Subscriber<{}>;
+  products:any;
 
   constructor(
     public snackBar: MatSnackBar
     ) {
-      // this.getObject()
-      this.products= this.getObject();
-      this.cartItems.subscribe(
-        products => this.products = products
-      );
+  
+      getStorage('cartItem').then(res => {
+        this.cartItems.next(res || [] )
+        this.products = this.cartItems.value
+        console.log(res);
+        
+      })
+
+      // this.cartItems.subscribe(
+      //   products => this.products = products
+      // );
+      console.log(this.products);
+      
+      
    }
 
 
-   // JSON "get" example
- async getObject() : Promise<{ value: any }>{
-  const ret:any = await Storage.get({ key: 'cartItem' });
-  return JSON.parse(ret.value);
+
+ngOnInit(){
+  console.log(this.products);
   
 }
 
-    // Get Products
+//     // Get Products
   public getItems(): Observable<CartItem[]> {
-    const itemsStream = new Observable(observer => {
-      observer.next(this.products);
-      observer.complete();
-    });
-    return <Observable<CartItem[]>>itemsStream;
+    return this.cartItems
+    // const itemsStream = new Observable(observer => {
+    //   observer.next(this.products);
+    //   observer.complete();
+    // });
+    // return <Observable<CartItem[]>>itemsStream;
   }
 
    // Add to cart
@@ -60,32 +65,28 @@ public observer   :  Subscriber<{}>;
          let qty = this.products[index].quantity + quantity;
          let stock = this.calculateStockCounts(this.products[index], quantity);
          if(qty != 0 && stock) {
-          this.products[index]['quantity'] = qty;
+           this.products[index]['quantity'] = qty;
            message = 'El producto ' + product.name + ' se agrego tu carrito';
            status = 'toastSuccess';
-           this.snackBar.open(message, 'x', { panelClass: [status], verticalPosition: 'top', duration: 1000 });
+           this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 1000 });
          }
          return true;
        }
      } );
 
-     // If Products does not exist (Add New Products)
-    if(!hasItem) {
+     // If this.Products does not exist (Add New this.Products)
+     if(!hasItem) {
       item = { product: product, quantity: quantity };
       this.products.push(item);
       message = 'El producto ' + product.name + ' se agrego tu carrito';
-      status = 'success';
-      this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
+      status = 'toastSuccess';
+      this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 1000 });
     }
   
-      this.setItem();
-      
+
+     setStorage("cartItem", this.products);
      return item;
 
-   }
-
-   async setItem(){
-    await Storage.set({key: 'cartItem' , value: JSON.stringify(this.products)});
    }
 
 // Calculate Product stock Counts
@@ -95,14 +96,11 @@ public calculateStockCounts(product: CartItem, quantity): CartItem | Boolean {
   let stock = product.product.stock;
   if(stock < qty) {
     // this.toastrService.error('You can not add more items than available. In stock '+ stock +' items.');
-    this.snackBar.open('No puedes agregar, sin stock. En stock ' + stock + ' artículos.', '×', { panelClass: 'error', verticalPosition: 'top', duration: 3000 });
+    this.snackBar.open('No puedes agregar, sin stock. En stock ' + stock + ' artículos.', '×', { panelClass: 'toastError', verticalPosition: 'top', duration: 1000 });
     return false
   }
   return true
 }
-
-
-
 
 
 // Removed in cart
@@ -110,15 +108,18 @@ public removeFromCart(item: CartItem) {
   if (item === undefined) return false;
     const index = this.products.indexOf(item);
     this.products.splice(index, 1);
-    this.setItem()
+    setStorage("cartItem", this.products);
 }
 
 // Total amount
 public getTotalAmount(): Observable<number> {
   return this.cartItems.pipe(map((product: CartItem[]) => {
-    return this.products.reduce((prev, curr: CartItem) => {
-      return prev + curr.product.price * curr.quantity;
-    }, 0);
+    if(this.products){
+      return this.products.reduce((prev, curr: CartItem) => {
+        return prev + curr.product.price * curr.quantity;
+      }, 0);
+
+    }
   }));
 }
 
@@ -130,11 +131,10 @@ public updateCartQuantity(product: Product, quantity: number): CartItem | boolea
       let stock = this.calculateStockCounts(this.products[index], quantity);
       if (qty != 0 && stock)
         this.products[index]['quantity'] = qty;
-        this.setItem()
+      setStorage("cartItem", this.products);
       return true;
     }
   });
 }
-
 
 }

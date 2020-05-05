@@ -1,0 +1,38 @@
+<ng-container *ngIf="currentUser; then loged; else noLoged"></ng-container>
+
+<ng-template #loged>
+    <div class="user" [ngClass]="{'color': true}">
+        <a class="account" [ngClass]="{'color': true}" 
+            [matMenuTriggerFor]="menu" 
+            #menuTrigger="matMenuTrigger"
+            >
+            Mi cuenta
+        </a>
+        <a class="menu-user" [ngClass]="{'color': true}" aria-label="">
+            <span>{{ currentUser.name }}</span>
+            <i class="material-icons">person</i>
+        </a>
+        <mat-menu [overlapTrigger]="false" #menu="matMenu">
+            <span (mouseleave)="menuTrigger.closeMenu()">
+                <a mat-menu-item [routerLink]="[ '/mi-cuenta' ]" >
+                    <mat-icon>person_pin</mat-icon>
+                    <span>Administrar</span>
+                </a>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Salir</span>
+                </button>
+            </span>
+
+        </mat-menu>
+    </div>
+</ng-template>
+
+<ng-template #noLoged>
+    <div class="user">
+        <span></span>
+        <span>
+            <a mat-button class="login" (click)="login()" [ngClass]="{'color': true}" >Entrar</a>
+        </span>
+    </div>
+</ng-template>

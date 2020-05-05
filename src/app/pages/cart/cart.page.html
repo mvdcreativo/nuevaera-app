@@ -1,0 +1,50 @@
+<header-component> </header-component>
+
+
+<ion-content mode="ios">
+  <!-- <ion-item lines="none" color="" size="small" class="ion-padding-start ion-padding-end">
+    <ion-label >
+      Datos de Envío y Facturación
+    </ion-label> 
+  </ion-item> -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Pedido</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let item of shoppingCartItems; let i = index" color="light" lines="none">
+      <ion-thumbnail slot="start" detail>
+        <ion-img [src]="urlFiles+item.product.picture"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <p>{{ item.product.name }}</p>
+        <p class="detalles"><span class="qty ion-padding">{{ item.quantity }} uni.</span> <span class="price">$U
+            {{ item.product.price | number }}</span></p>
+      </ion-label>
+      <ion-buttons class="actions ">
+
+        <mat-icon class="icon material-icons-round" (click)="presentActionSheet(item)">edit</mat-icon>
+
+      </ion-buttons>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="total"><br> Total: $U {{ getTotal() | async | number }}</ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <div class="zigzag"></div>
+
+  <div class="botones ion-padding-start ion-padding-end">
+    <ion-button color="warning" [routerLink]="['/']" >
+      Seguir comprando
+    </ion-button>
+    <ion-button [routerLink]="['/data-order']" *ngIf="shoppingCartItems.length" fill="outline" color="warning">
+      Continuar con el Pago
+    </ion-button>
+
+  </div>
+
+  
+
+</ion-content>

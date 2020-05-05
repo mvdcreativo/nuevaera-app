@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CartItem } from 'src/app/modules/payment/interfaces/cart-item';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cart-button',
@@ -8,8 +9,14 @@ import { CartItem } from 'src/app/modules/payment/interfaces/cart-item';
 })
 export class CartButtonComponent implements OnInit {
 @Input()itemsCart:CartItem[]
-  constructor() { }
+  constructor(
+    private router:Router
+  ) { }
 
   ngOnInit() {}
+
+  onClick(){
+    this.router.navigate(['/cart'])
+  }
 
 }

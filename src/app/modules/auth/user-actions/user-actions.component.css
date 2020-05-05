@@ -1,0 +1,54 @@
+.user {
+  width: 100%;
+  float: right;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  justify-items: right;
+  margin-right: 1rem;
+}
+.user a,
+.user span {
+  font-size: 10pt !important;
+}
+.user a {
+  cursor: pointer;
+}
+.user .account {
+  align-items: center;
+  justify-items: center;
+}
+.user .menu-user {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: center;
+  justify-items: center;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+.user .menu-user a {
+  color: #424242;
+  padding: 0.4rem 1rem;
+  font-weight: 300;
+}
+.user .menu-user a:hover {
+  color: #424242;
+}
+.user span .register {
+  border-radius: 50px;
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 2em;
+  margin-left: 3px;
+}
+.user span .login {
+  background-color: rgba(0, 0, 0, 0.06);
+  border-radius: 50px;
+  font-size: 1em;
+  font-weight: 300;
+  line-height: 2em;
+}
+.color {
+  color: white;
+  font-weight: 300;
+}

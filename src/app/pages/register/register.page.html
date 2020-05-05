@@ -1,0 +1,51 @@
+<header-component></header-component>
+
+
+<ion-content mode="ios">
+  <ion-list>
+    <ion-item lines="none" class="ion-margin logo">
+      <ion-img src="../../assets/logo.png"></ion-img>
+    </ion-item>
+
+    <ion-list-header>
+      <ion-title>Registrarse</ion-title>
+
+    </ion-list-header>
+<form [formGroup]="formRegister" (ngSubmit)="onSubmitRegister()">
+
+  <ion-item lines="none" class="ion-margin">
+    <ion-input formControlName="name" placeholder="Nombre" class="input" type="text" autocorrect="off" clear-input="true">
+    </ion-input>
+  </ion-item>
+  
+  <ion-item lines="none" class="ion-margin">
+    <ion-input formControlName="phone" placeholder="Celular" class="input" type="number" autocorrect="off"></ion-input>
+  </ion-item>
+  
+  <ion-item lines="none" class="ion-margin">
+    <ion-input formControlName="email" placeholder="Correo Electrónico" type="email" class="input" autocomplete="off" autocorrect="off" clear-input="true">
+    </ion-input>
+  </ion-item>
+  
+  <ion-item lines="none" class="ion-margin">
+    <ion-input formControlName="password" placeholder="Contraseña" class="input" type="password"  autocomplete="off"></ion-input>
+  </ion-item>
+  
+  <ion-item lines="none" class="ion-margin">
+    <ion-input formControlName="password_confirmation" placeholder="Confirmar contraseña" type="password" class="input"  autocomplete="off"></ion-input>
+  </ion-item>
+  <mat-error  lines="none">
+    <label *ngIf="errorLogin">{{ errorLogin | async }}</label>
+  </mat-error>
+  
+  <ion-item lines="none" class="ion-margin">
+    <ion-button shape="round" type="submit" color="warning">Registrarme</ion-button>
+  </ion-item>
+  
+</form>
+    <ion-item lines="none" class="ion-margin center">
+      <ion-label><ion-chip color="warning" [routerLink]="['/register']">Iniciar Sesión</ion-chip></ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

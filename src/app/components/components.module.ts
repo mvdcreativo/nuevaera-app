@@ -10,6 +10,7 @@ import { OfersSlidesComponent } from './ofers-slides/ofers-slides.component';
 import { AvatarSlidesComponent } from './avatar-slides/avatar-slides.component';
 import { BannerSlidesComponent } from './banner-slides/banner-slides.component';
 import { BrandsSlidesComponent } from './brand-slides/brands-slides.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { BrandsSlidesComponent } from './brand-slides/brands-slides.component';
   imports: [
     CommonModule,
     IonicModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule
   ],
   exports: [
     HeaderComponent,

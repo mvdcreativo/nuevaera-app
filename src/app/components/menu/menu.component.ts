@@ -4,6 +4,8 @@ import { MenuService } from './services/menu.service';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/modules/auth/auth.service';
+import { getStorage, setStorage, removeStorage } from "src/app/shared/storage/services/storage.service";
 
 @Component({
   selector: 'menu-principal',
@@ -12,13 +14,15 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
   itemsCategory: any;
+  loged: boolean;
 
   constructor(
     private menu: MenuController,
     private menuService: MenuService,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
-    private route : Router
+    private route : Router,
+    private authService: AuthService
   ) { 
     this.matIconRegistry.addSvgIcon(
       "alimento-perro",
@@ -48,16 +52,44 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.itemsCategory = this.menuService.categories()
-
+    
+    this.logeado()
   }
 
+  async logeado(){
+    console.log(this.authService.currentUser);
+    
+     this.authService.currentUser.subscribe(
+      user => {
+        console.log(user);
+        
+        if(user) {
+          this.loged = true
+        }else{
+          this.loged = false
+        }
+      }
+    )
 
+  }
 
   onClickLink(item){
     this.route.navigate(["/list", item])
     this.menu.close()
   }
+  close(){
+    this.menu.close()
+  }
 
-
-  
+ login(){
+   this.route.navigate(['/login'])
+   this.menu.close()
+ }
+ register(){
+  this.route.navigate(['/register'])
+  this.menu.close()
+}
+  logout(){
+    this.authService.logout()
+  }
 }
