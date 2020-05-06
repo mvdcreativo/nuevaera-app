@@ -11,6 +11,7 @@ import { AvatarSlidesComponent } from './avatar-slides/avatar-slides.component';
 import { BannerSlidesComponent } from './banner-slides/banner-slides.component';
 import { BrandsSlidesComponent } from './brand-slides/brands-slides.component';
 import { RouterModule } from '@angular/router';
+import { MercadopagoWebComponent } from './mercadopago-web/mercadopago-web.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { RouterModule } from '@angular/router';
     OfersSlidesComponent,
     AvatarSlidesComponent,
     BannerSlidesComponent,
-    BrandsSlidesComponent
+    BrandsSlidesComponent,
+    MercadopagoWebComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,9 @@ import { RouterModule } from '@angular/router';
     OfersSlidesComponent,
     AvatarSlidesComponent,
     BannerSlidesComponent,
-    BrandsSlidesComponent
+    BrandsSlidesComponent,
+    MercadopagoWebComponent
+
   ]
 })
 export class ComponentsModule { }

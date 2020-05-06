@@ -30,6 +30,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/data-order/data-order.module').then( m => m.DataOrderPageModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'pago/:idOrder',
+    loadChildren: () => import('./pages/pago/pago.module').then( m => m.PagoPageModule)
+  },
 ];
 
 @NgModule({

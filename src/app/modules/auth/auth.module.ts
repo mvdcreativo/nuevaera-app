@@ -5,7 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // import { LoginComponent } from './login/login.component';
 // import { RegisterComponent } from './register/register.component';
 import { AuthRoutingModule } from './auth-routing.module';
-import { UserActionsComponent } from './user-actions/user-actions.component';
+// import { UserActionsComponent } from './user-actions/user-actions.component';
 // import { ModalAuthComponent } from './modal-auth/modal-auth.component';
 // import { AccessComponent } from './access/access.component';
 // import { ResetPassDielogComponent } from './access/reset-pass-dielog/reset-pass-dielog.component';
@@ -16,7 +16,7 @@ import { UserActionsComponent } from './user-actions/user-actions.component';
   declarations: [
     // LoginComponent,
     // RegisterComponent,
-    UserActionsComponent,
+    // UserActionsComponent,
     // ModalAuthComponent,
     // AccessComponent,
     // ResetPassDielogComponent,
@@ -29,7 +29,7 @@ import { UserActionsComponent } from './user-actions/user-actions.component';
     ReactiveFormsModule,
   ],
   exports: [
-    UserActionsComponent
+    // UserActionsComponent
   ],
   entryComponents: [
     // ModalAuthComponent
