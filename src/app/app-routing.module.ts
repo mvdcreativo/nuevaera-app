@@ -34,6 +34,10 @@ const routes: Routes = [
     path: 'pago/:idOrder',
     loadChildren: () => import('./pages/pago/pago.module').then( m => m.PagoPageModule)
   },
+  {
+    path: 'orders-list',
+    loadChildren: () => import('./pages/orders-list/orders-list.module').then( m => m.OrdersListPageModule)
+  },
 ];
 
 @NgModule({

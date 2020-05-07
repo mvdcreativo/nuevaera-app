@@ -46,7 +46,7 @@ options : InAppBrowserOptions = {
 
 
   openUrl(url){
-    const browser = this.browser.create(url, '_self', this.options);
+    const browser = this.browser.create(url,'_self', this.options);
 
     // // browser.executeScript(...);
 

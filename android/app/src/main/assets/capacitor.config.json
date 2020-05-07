@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "nueva-era-app",
+  "appId": "nuevaera.app",
+  "appName": "Nueva Era",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
