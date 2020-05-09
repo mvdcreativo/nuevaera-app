@@ -1,4 +1,4 @@
-<!-- <ion-card mode="ios" (click)="onClick(data.id)" >
+<!-- <ion-card mode="ios >
   <ion-img [src]="urlFiles+data.picture"></ion-img>
   <ion-card-header>
     <ion-card-subtitle *ngIf="data.brand">{{ data.brand.name }}</ion-card-subtitle>
@@ -10,21 +10,20 @@
   </ion-card-content>
 </ion-card> -->
 
-    <ion-item color="light" type="button" lines="none">
-      <ion-thumbnail slot="start"  (click)="onClick(data.id)" detail >
+    <ion-item color="light" lines="none" >
+      <ion-thumbnail slot="start" detail  [routerLink]="['/product-detail', data.id]">
         <ion-img [src]="urlFiles+data.picture"></ion-img>
       </ion-thumbnail>
-      <ion-label>
-        <p class="title"  (click)="onClick(data.id)">{{ data.name }}</p>
+      <ion-label [routerLink]="['/product-detail', data.id]" >
+        <p class="title">{{ data.name }}</p>
         <p *ngIf="data.brand">{{ data.brand.name }}</p>
-        <p class="price"  (click)="onClick(data.id)">$U {{ data.price }}</p>
-        <ion-buttons class="actions">
-          <ion-chip color="warning" (click)="addToCart(data)">
-            <mat-icon class="material-icons-round">add_shopping_cart</mat-icon>
-            <!-- <ion-label>Default</ion-label> -->
-          </ion-chip>
-        </ion-buttons>
+        <p class="price">$U {{ data.price }}</p>
       </ion-label>
-      
+      <ion-buttons class="actions">
+        <ion-chip color="warning" (click)="addToCart(data)">
+          <mat-icon class="material-icons-round">add_shopping_cart</mat-icon>
+          <!-- <ion-label>Default</ion-label> -->
+        </ion-chip>
+      </ion-buttons>
     </ion-item>
 

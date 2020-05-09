@@ -37,7 +37,7 @@
         <ion-label>Mi cuenta</ion-label>
       </ion-list-header>
 
-      <ion-item lines="none" inset="true" detail>
+      <ion-item lines="none" inset="true" [routerLink]="['/orders-list']" (click)="close()"  detail>
         <ion-label>Mis pedidos</ion-label>
         <ion-icon slot="end" name="receipt-outline" color="medium"></ion-icon>
       </ion-item>

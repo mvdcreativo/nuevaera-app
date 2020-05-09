@@ -32,7 +32,11 @@ ion-thumbnail{
     width: 80%;
 }
 .actions{
-    float: right;
-    margin-top: -25px;
+    position: absolute;
+    right: 16px;
+    bottom: 10px;
     font-size: 12px;
+}
+ion-label{
+    outline:none!important;
 }
