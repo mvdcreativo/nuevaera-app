@@ -26,14 +26,14 @@ public observer   :  Subscriber<{}>;
       getStorage('cartItem').then(res => {
         this.cartItems.next(res || [] )
         this.products = this.cartItems.value
-        console.log(res);
+        // console.log(res);
         
       })
 
       // this.cartItems.subscribe(
       //   products => this.products = products
       // );
-      console.log(this.products);
+      // console.log(this.products);
       
       
    }

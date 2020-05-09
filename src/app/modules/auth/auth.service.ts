@@ -43,7 +43,7 @@ export class AuthService implements OnInit {
     if (this.currentUserSubject.value && this.currentUserSubject.value.user) {
       // this.actualizaUser(this.currentUserSubject.value.user.id);
     }
-    console.log(this.currentUserSubject);
+    // console.log(this.currentUserSubject);
 
     return this.currentUserSubject.value;
   }

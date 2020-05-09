@@ -1,9 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>orders-list</ion-title>
-  </ion-toolbar>
-</ion-header>
+<header-component [backButton]="false"> </header-component>
 
-<ion-content>
+<ion-content mode="ios">
+<ion-list>
+  <ion-list-header>
+    <ion-label>Mis últimos pedidos</ion-label>
+  </ion-list-header>
+</ion-list>
+
+<ion-item *ngFor="let order of orders" detail >
+  <ion-label>
+    <p>
+      {{ order.created_at | date: 'dd-MM-y' }}
+    </p>
+    <p>
+      importe $U {{ order.total | number }}
+    </p>
+  </ion-label>
+  <ion-text color="">
+   <ion-chip color="danger" small mode="ios">
+     <ion-label>repetir</ion-label>
+     <ion-icon name="refresh-outline"></ion-icon>
+   </ion-chip> 
+  </ion-text>
+
+</ion-item>
 
 </ion-content>

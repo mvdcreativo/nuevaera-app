@@ -49,11 +49,9 @@ export class ProductService {
   }
 
   //////SEARCHER/////
-  public searchProduct(data: any) {
-
-    return this._http.get<Product[]>(`${environment.API}search`, data).pipe(
-      take(1)
-    )
+  public searchProduct(data: any, page) {
+    
+    return this._http.get<Product[]>(`${environment.API}search-paginate/${data}?page=${page}`)
     // return this.products.find(product=> product.id === id);
 
     // return this.httpClient.get<Product>(this._url + 'product-' + id + '.json');

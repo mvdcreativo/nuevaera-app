@@ -63,7 +63,7 @@ export class HomePage implements OnInit {
       this.itemAvatarSlides = avatar_slides.map( v => {
         return {id:v.id, title:v.name, src_image: `../../../assets/images/${v.slug}.svg`}
       })
-      console.log(this.itemAvatarSlides);
+      // console.log(this.itemAvatarSlides);
       
     })
   }

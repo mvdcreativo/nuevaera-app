@@ -34,7 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 if (user) {
                     const token = user.token;
 
-                    console.log(token);
+                    // console.log(token);
                     if (token) {
                         // console.log(token)
                         const headers = req.headers

@@ -57,11 +57,11 @@ export class MenuComponent implements OnInit {
   }
 
   async logeado(){
-    console.log(this.authService.currentUser);
+    // console.log(this.authService.currentUser);
     
      this.authService.currentUser.subscribe(
       user => {
-        console.log(user);
+        // console.log(user);
         
         if(user) {
           this.loged = true

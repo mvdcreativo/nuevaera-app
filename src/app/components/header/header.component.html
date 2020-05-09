@@ -6,8 +6,16 @@
       <ion-menu-button menu="principal" slot="start"></ion-menu-button>
     </ion-buttons>
 
-    <ion-searchbar placeholder="Buscar" showCancelButton="focus" cancelButtonText="cancelar" animated>
+    <ion-searchbar 
+    placeholder="Buscar" 
+    showCancelButton="focus" 
+    (ionChange)="search($event)" 
+    cancelButtonText="cancelar"
+    enterkeyhint="search"
+    debounce="400"
+    animated>
     </ion-searchbar>
+
     <cart-button [itemsCart]="carItems" slot="end" class="cart-button"></cart-button>
   </ion-toolbar>
 </ion-header>

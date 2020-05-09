@@ -18,6 +18,7 @@ export class ListPage implements OnInit {
   lastPage: number = 0;
   category: any;
   brand: any;
+  search: any;
 
 
   constructor(
@@ -38,6 +39,7 @@ export class ListPage implements OnInit {
 
         }else{
           ///Buscador
+
           this.navegaConQueryParams()
           console.log(params);
           
@@ -62,17 +64,17 @@ export class ListPage implements OnInit {
   }
 
   navegaConQueryParams(){
+
   this.route.queryParamMap.subscribe(
     (params:Params) => {
-      if(params){
+      if(params.params.buscando){
+        console.log(params.params);
+        this.products = []
+        this.currentPage = 0
         
-        this.productService.searchProduct(params).subscribe(
-          (res:any)=> {
-            console.log(res);
-            // this.allItems = res
-            this.products = res
-          }
-        )
+        this.search = params.params.buscando
+        this.searcher(this.search)
+
         
       }else{
       }
@@ -104,12 +106,23 @@ export class ListPage implements OnInit {
     })
   }
 
-
+  searcher(params){
+    console.log(params);
+    
+    const page = this.currentPage + 1
+    this.productService.searchProduct(params, page).subscribe(
+      (res:any)=> {
+        console.log(res);
+        // this.allItems = res
+        this.agregaDatos(res)
+      }
+    )
+  }
 
 
  private agregaDatos(res){
     this.products.push(...res.data);
-
+    this.infiniteScroll.disabled = false
     this.totalProduct = res.total
     this.currentPage = res.current_page
     this.lastPage= res.last_page
@@ -130,9 +143,14 @@ export class ListPage implements OnInit {
   loadData(e){
     if(this.category){
       this.categories(this.category)
-    }else{
+    }
+    if(this.brand){
       this.brands(this.brand)
     }
+    if(this.search){
+      this.searcher(this.search)
+    }
+
   }
   
 }

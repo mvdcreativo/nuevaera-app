@@ -6,6 +6,7 @@ import { Order } from '../interfaces/order';
 import { map, take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../auth/auth.service';
+import { User } from '../../auth/interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -16,17 +17,27 @@ export class OrderService {
     
   cuotas$ =  new BehaviorSubject<number>(null);
   id_medio_pago$ = new BehaviorSubject<number>(null);
+  user: User;
 
   constructor(
     private _http: HttpClient,
     private _snackBar: MatSnackBar,
     public authService : AuthService
-  ) { }
+  ) { 
+    this.user = authService.currentUserValue.user
+  }
 
 
     // //Orders
-    getOrders() {
-      return this._http.get<Order[]>(`${environment.API}order`).pipe(
+    getOrders(data) {
+      return this._http.get<Order[]>(`${environment.API}order`, {
+        params: new HttpParams()        
+              // .set('page', pageNumber.toString())
+              // .set('filter', filter)
+              // .set('sortOrder', sortOrder)
+              .set('pageSize', data.pageSize.toString())
+              
+      }).pipe(
         take(1)
       )
     }
@@ -57,6 +68,10 @@ export class OrderService {
       return this._http.get<any[]>(`${environment.API}status`).pipe(
         take(1)
       )
+    }
+
+    getOrderUser(){
+        return this._http.get<Order[]>(`${environment.API}order`)
     }
 
     // registrarCliente(data): Observable<any>{
