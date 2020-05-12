@@ -17,7 +17,8 @@ export class Product {
     brand_id?:number;
     category_id?:number;
     pictures?:string;
-    visits?:number
+    visits?:number;
+    pivot?: Pivot;
 }
 
 export interface Category {
@@ -36,4 +37,11 @@ export interface Brand {
     image_url:string;
     description?:string;
     products?:any;
+}
+
+export interface Pivot {
+    order_id:number;
+    price:number;
+    product_id:number;
+    quantity:number
 }

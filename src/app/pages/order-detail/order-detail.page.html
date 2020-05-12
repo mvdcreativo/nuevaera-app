@@ -1,0 +1,48 @@
+<header-component> </header-component>
+
+
+<ion-content mode="ios"  *ngIf="order | async as ordr">
+  <!-- <ion-item lines="none" color="" size="small" class="ion-padding-start ion-padding-end">
+    <ion-label >
+      Datos de Envío y Facturación
+    </ion-label> 
+  </ion-item> -->
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Pedido del {{ ordr.created_at | date: 'dd/MM/y H:mm' }}</ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let item of ordr.productos ; let i = index" color="light" lines="none">
+      <ion-thumbnail slot="start" detail>
+        <ion-img [src]="urlFiles+item.picture"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <p>{{ item.name }}</p>
+        <p class="detalles"><span class="qty ion-padding">{{ item.pivot.quantity }} uni.</span> <span class="price">$U
+            {{ item.pivot.price | number }}</span></p>
+      </ion-label>
+      <ion-buttons class="actions ">
+
+        <!-- <mat-icon class="icon material-icons-round" (click)="presentActionSheet(item)">edit</mat-icon> -->
+
+      </ion-buttons>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="total"><br> Total: $U {{ ordr.total | number }}</ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <div class="zigzag"></div>
+  <p color="medium" class="text ion-padding">Si eliges repetir el pedido se te agregará automáticamente a tu carrito de compras</p>
+  <div class="botones ion-padding-start ion-padding-end">
+    <ion-button  color="warning" (click)="repetir()">
+      Repetir Pedido
+      <ion-icon name="refresh-outline" class="ion-padding"></ion-icon>
+    </ion-button>
+
+  </div>
+
+  
+
+</ion-content>

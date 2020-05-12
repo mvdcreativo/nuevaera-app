@@ -4,20 +4,16 @@
 
 export const environment = {
   production: false,
-  API : "https://desarrollo.nuevaerauruguay.com/api/",
-  AuthAPI: 'https://desarrollo.nuevaerauruguay.com/api/auth/',
-  urlPago: 'https://desarrollo.nuevaerauruguay.com/mercado-pago',
-  urlFiles: 'https://desarrollo.nuevaerauruguay.com/storage/',
+  // API : "https://desarrollo.nuevaerauruguay.com/api/",
+  // AuthAPI: 'https://desarrollo.nuevaerauruguay.com/api/auth/',
+  // urlPago: 'https://desarrollo.nuevaerauruguay.com/mercado-pago',
+  // urlFiles: 'https://desarrollo.nuevaerauruguay.com/storage/',
 
-  // API : "http://apinuevaera.test/api/",
-  // AuthAPI: 'http://apinuevaera.test/api/auth/',
-  // urlPago: 'http://apinuevaera.test/mercado-pago',
-  // urlFiles: 'http://apinuevaera.test/storage/',
+  API : "https://api.nuevaerauruguay.com/api/",
+  AuthAPI: 'https://api.nuevaerauruguay.com/api/auth/',
+  urlPago: 'https://api.nuevaerauruguay.com/mercado-pago',
+  urlFiles: 'https://api.nuevaerauruguay.com/storage/',
 
-  // API : "http://192.168.0.103/apiNuevaEra/public/api/",
-  // AuthAPI: 'http://192.168.0.103/apiNuevaEra/public/api/auth/',
-  // urlPago: 'http://192.168.0.103/apiNuevaEra/public/mercado-pago',
-  // urlFiles: 'http://192.168.0.103/apiNuevaEra/public/storage/',
 };
 
 /*

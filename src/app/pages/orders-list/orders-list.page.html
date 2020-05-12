@@ -1,28 +1,43 @@
 <header-component> </header-component>
 
 <ion-content mode="ios">
-<ion-list>
-  <ion-list-header>
-    <ion-label>Mis últimos pedidos</ion-label>
-  </ion-list-header>
-</ion-list>
+  <ng-container *ngIf="orders === [];then list else noItem"></ng-container>
 
-<ion-item *ngFor="let order of orders" detail >
-  <ion-label>
-    <p>
-      {{ order.created_at | date: 'dd-MM-y' }}
-    </p>
-    <p>
-      importe $U {{ order.total | number }}
-    </p>
-  </ion-label>
-  <ion-text color="">
-   <ion-chip color="danger" small mode="ios">
-     <ion-label>repetir</ion-label>
-     <ion-icon name="refresh-outline"></ion-icon>
-   </ion-chip> 
-  </ion-text>
+  <ng-template #list>
+    <ion-list >
+      <ion-list-header>
+        <ion-label>Mis últimos pedidos</ion-label>
+      </ion-list-header>
+  
+  
+      <ion-item *ngFor="let order of orders" lines="none" detail>
+        <ion-label [routerLink]="['/order-detail', order.id]">
+          <p>
+            Pedido realizado {{ order.created_at | date: 'dd/MM/y h:mm' }}
+          </p>
+          <p>
+            importe $U {{ order.total | number }}
+          </p>
+        </ion-label>
+        <ion-text color="">
+          <ion-chip color="danger" (click)="repetir(order.productos)" small mode="ios">
+            <ion-label>repetir</ion-label>
+            <ion-icon name="refresh-outline"></ion-icon>
+          </ion-chip>
+        </ion-text>
+  
+      </ion-item>
+    </ion-list>
+  </ng-template>
 
-</ion-item>
+  <ng-template #noItem >
 
+    <ion-list>
+      <ion-list-header>
+        <ion-label>No tienes pedidos</ion-label>
+      </ion-list-header>
+
+    </ion-list>
+  </ng-template>
+  
 </ion-content>

@@ -13,12 +13,14 @@ export interface Order {
     state?: string;
     email: string;
     phone?: string;
-    productos: ProductOrder[];
+    productos: Product[];
     status_id?:number;
     status: Status;
     payment_method_id?:number;
     url_pdf?:string;
     talon_cobro?:string;
+    total?:number;
+    created_at?:string
 
 
 }

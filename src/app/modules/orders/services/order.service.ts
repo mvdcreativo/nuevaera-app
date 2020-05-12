@@ -7,6 +7,7 @@ import { map, take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../auth/auth.service';
 import { User } from '../../auth/interfaces/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +23,14 @@ export class OrderService {
   constructor(
     private _http: HttpClient,
     private _snackBar: MatSnackBar,
-    public authService : AuthService
+    public authService : AuthService,
+    private router : Router
   ) { 
-    this.user = authService.currentUserValue.user
+    if(this.authService.currentUserValue && this.authService.currentUserValue.user){
+      this.user = this.authService.currentUserValue.user
+    }else{
+      this.router.navigate(['/login'])
+    }
   }
 
 

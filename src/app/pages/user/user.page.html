@@ -1,0 +1,151 @@
+<header-component></header-component>
+
+<ion-content *ngIf="user">
+  <ion-list lines="none">
+    <ion-list-header>
+      <ion-label>Mis Datos</ion-label>
+      <ion-chip color="medium" mode="ios" outline="true" (click)="edit()">
+        <ion-label>
+          <mat-icon class="icon material-icons-round">edit</mat-icon>
+        </ion-label>
+      </ion-chip>
+    </ion-list-header>
+
+
+ 
+    <ng-container *ngIf="!editable ; then data else editData"></ng-container>
+
+      <ng-template #data>
+
+        <ion-item>
+          <ion-label>Nombre:
+            <span class="data-text">{{ user.name }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Apellido:
+            <span class="data-text">{{ user.lastname }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Documento:
+            <span class="data-text">{{ user.ci }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Empresa:
+            <span class="data-text">{{ user.company }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>RUT:
+            <span class="data-text">{{ user.rut }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Tel/Cel:
+            <span class="data-text">{{ user.phone }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Dirección:
+            <span class="data-text">{{ user.address }}</span>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ciudad:
+            <span class="data-text">{{ user.city }}</span>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Departamento:
+            <span class="data-text">{{ user.state }}</span>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Email:
+            <span class="data-text">{{ user.email }}</span>
+          </ion-label>
+        </ion-item>
+
+      </ng-template>
+
+      <ng-template #editData>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+          <ion-item lines="none" class="ion-margin">
+            <ion-input formControlName="name" placeholder="Nombre" class="input" type="text" autocorrect="off"
+              clear-input="true">
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none" class="ion-margin">
+            <ion-input formControlName="lastname" placeholder="Apellido" class="input" type="text" autocorrect="off"
+              clear-input="true">
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none" class="ion-margin">
+            <ion-input formControlName="ci" placeholder="Documento" class="input" type="text" autocorrect="off"
+              clear-input="true">
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none" class="ion-margin">
+            <ion-input formControlName="company" placeholder="Empresa (opcional)" class="input" type="text" autocorrect="off"
+              clear-input="true">
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none" class="ion-margin">
+            <ion-input formControlName="rut" placeholder="R.U.T. (opcional)" class="input" type="text" autocorrect="off"
+              clear-input="true">
+            </ion-input>
+          </ion-item>
+          
+          <ion-item lines="none" class="ion-margin">
+            <ion-input formControlName="phone" placeholder="Tel/Celular" class="input" type="number" autocorrect="off">
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none" class="ion-margin">
+            <ion-input formControlName="address" placeholder="Dirección" class="input" type="text" autocorrect="off"
+              clear-input="true">
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none" class="ion-margin">
+            <ion-input formControlName="city" placeholder="Ciudad" class="input" type="text" autocorrect="off"
+              clear-input="true">
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none" class="ion-margin">
+            <ion-input formControlName="state" placeholder="Departamento" class="input" type="text" autocorrect="off"
+              clear-input="true">
+            </ion-input>
+          </ion-item>
+
+          <ion-item lines="none" class="ion-margin">
+            <ion-input formControlName="email" placeholder="Correo Electrónico" type="email" class="input"
+              autocomplete="off" autocorrect="off" clear-input="true">
+            </ion-input>
+          </ion-item>
+
+
+          <ion-item lines="none" class="ion-margin">
+            <ion-button shape="round" (click)="editable = !editable" fill="outline" color="warning">Cancelar</ion-button>         
+            <ion-button shape="round" type="submit" color="warning">Guardar</ion-button>
+          </ion-item>
+
+        </form>
+
+      </ng-template>
+
+
+    
+  </ion-list>
+</ion-content>

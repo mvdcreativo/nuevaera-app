@@ -38,6 +38,14 @@ const routes: Routes = [
     path: 'orders-list',
     loadChildren: () => import('./pages/orders-list/orders-list.module').then( m => m.OrdersListPageModule)
   },
+  {
+    path: 'order-detail/:idOrder',
+    loadChildren: () => import('./pages/order-detail/order-detail.module').then( m => m.OrderDetailPageModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule)
+  },
 ];
 
 @NgModule({

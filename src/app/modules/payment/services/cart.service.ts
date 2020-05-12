@@ -68,7 +68,7 @@ ngOnInit(){
            this.products[index]['quantity'] = qty;
            message = 'El producto ' + product.name + ' se agrego tu carrito';
            status = 'toastSuccess';
-           this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 1000 });
+           this.snackBar.open(message, '', { panelClass: [status], verticalPosition: 'top', duration: 500 });
          }
          return true;
        }
@@ -80,7 +80,7 @@ ngOnInit(){
       this.products.push(item);
       message = 'El producto ' + product.name + ' se agrego tu carrito';
       status = 'toastSuccess';
-      this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 1000 });
+      this.snackBar.open(message, '', { panelClass: [status], verticalPosition: 'top', duration: 500 });
     }
   
 
@@ -96,7 +96,7 @@ public calculateStockCounts(product: CartItem, quantity): CartItem | Boolean {
   let stock = product.product.stock;
   if(stock < qty) {
     // this.toastrService.error('You can not add more items than available. In stock '+ stock +' items.');
-    this.snackBar.open('No puedes agregar, sin stock. En stock ' + stock + ' artículos.', '×', { panelClass: 'toastError', verticalPosition: 'top', duration: 1000 });
+    this.snackBar.open('No puedes agregar, sin stock. En stock ' + stock + ' artículos.', '×', { panelClass: 'toastError', verticalPosition: 'top', duration: 500 });
     return false
   }
   return true

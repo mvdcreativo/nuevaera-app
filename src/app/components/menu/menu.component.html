@@ -41,8 +41,8 @@
         <ion-label>Mis pedidos</ion-label>
         <ion-icon slot="end" name="receipt-outline" color="medium"></ion-icon>
       </ion-item>
-      <ion-item lines="none" inset="true" detail>
-        <ion-label>Datos</ion-label>
+      <ion-item lines="none" inset="true" [routerLink]="['/user']" (click)="close()" detail>
+        <ion-label>Mis datos</ion-label>
         <ion-icon slot="end" name="newspaper-outline" color="medium"></ion-icon>
       </ion-item>
       <ion-item lines="none" inset="true" detail>

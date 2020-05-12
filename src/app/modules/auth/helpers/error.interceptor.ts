@@ -5,10 +5,14 @@ import { catchError } from 'rxjs/operators';
 import { removeStorage } from "src/app/shared/storage/services/storage.service";
 
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private authService: AuthService) { }
+    constructor(
+        private authService: AuthService,
+        private router: Router
+        ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log();
@@ -30,6 +34,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                     this.authService.errorSubject.next('Usuario o contraseña incorrectos')
                     console.log('Usuario o contraseña incorrectos');
                 }
+                if(err.error.message === "Unauthenticated."){
+                    this.router.navigate(['/login'])
+                }
+                
                 removeStorage('currentUser')
             }
             if (err.status === 422) {

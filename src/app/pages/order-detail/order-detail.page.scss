@@ -1,0 +1,86 @@
+
+
+
+ion-thumbnail{
+    --border-radius: 10px;
+    
+}
+
+.title, .price{
+    font-size: 14px;
+    
+}
+.price{
+    // float: right;
+    // text-align: right;
+    color: #3dc2ff!important;
+    width: 80%;
+}
+.actions{
+    // margin-top: -30px;
+    font-size: 12px;
+}
+.detalles{
+    float: right
+}
+.icon {
+    color: #cccccc;
+}
+.total{
+    float: right;
+    text-align: right;
+}
+.botones{
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    
+}
+.remove{
+	color: #eb445a;
+}
+
+.text{
+	text-align: center!important;
+	font-size: 14px;
+}
+
+//zigzag
+$height: 16px;
+$halfheight: ($height/2);
+$thickness: 110%; // increase to make the line thicker
+$offset: 4px;
+$backgroundcolor: #ffffff;
+$linecolor: #cccccc;
+
+.zigzag {
+	margin: 20px 0;
+	background: $backgroundcolor;
+	position: relative;
+	height: $height;
+	z-index: 1;
+	&:before,
+	&:after {
+		content: "";
+		display: block;
+		position: absolute;
+		left: 0;
+  		right: 0;
+	}
+	&:before {
+		height: ($height - $offset);
+		top: $thickness;
+		background: linear-gradient(-135deg, $linecolor $halfheight, transparent 0) 0 $halfheight, linear-gradient( 135deg, $linecolor $halfheight, transparent 0) 0 $halfheight;
+		background-position: top left;
+		background-repeat: repeat-x;
+		background-size: $height $height;
+	}
+	&:after {
+		height: $height;
+		top: 100%;
+		background: linear-gradient(-135deg, $backgroundcolor $halfheight, transparent 0) 0 $halfheight, linear-gradient( 135deg, $backgroundcolor $halfheight, transparent 0) 0 $halfheight;
+		background-position: top left;
+		background-repeat: repeat-x;
+		background-size: $height $height;
+	}
+}

@@ -11,7 +11,7 @@ export class OrdersListPage implements OnInit {
   public orders: any;
 
   constructor(
-    private cartServise : CartService,
+    private cartService : CartService,
     private orderService: OrderService,
   ) { }
 
@@ -20,8 +20,18 @@ export class OrdersListPage implements OnInit {
     this.orderService.getOrders(pageSize).subscribe(
       (res:any)=>{
         this.orders = res.data
+        console.log(this.orders);
+        
       }
     )
+  }
+
+
+  repetir(productos){
+    productos.map(
+      p => this.cartService.addToCart(p , p.pivot.quantity)
+    )
+    
   }
 
 }

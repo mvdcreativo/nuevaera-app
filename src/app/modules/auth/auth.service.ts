@@ -47,13 +47,15 @@ export class AuthService implements OnInit {
 
     return this.currentUserSubject.value;
   }
+
+
   public get errorValue(): any {
     return this.errorSubject.value;
   }
 
 
-  async actualizaUser(id) {
-    return await this.http.get<User>(`${environment.API}auth/users/${id}`).pipe(
+  actualizaUser(id) {
+    return this.http.get<User>(`${environment.API}auth/users/${id}`).pipe(
       take(1)
     ).subscribe(
       (res: any) => {
@@ -84,7 +86,7 @@ export class AuthService implements OnInit {
             let message, status;
             message = `Hola!! Gracias por egistrarte ${user.user.user.name} `;
             status = 'toastSuccess';
-            this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 3000 });
+            this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
             console.log(user);
 
             // store user details ands token in local storage to keep user logged in between page refreshes
@@ -116,7 +118,7 @@ export class AuthService implements OnInit {
             let message, status;
             message = `Hola de nuevo ${user.user.name}, gracias por preferirnos!`;
             status = 'toastSuccess';
-            this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 5000 });
+            this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
             // this.router.navigate(['admin'])
             // console.log(user);
 
@@ -165,13 +167,13 @@ export class AuthService implements OnInit {
           let message, status;
             message = res.message;
             status = 'toastSuccess';
-            this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 5000 });
+            this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
         },
         error => {
           let message, status;
           message = error;
           status = 'toastError';
-          this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 5000 });
+          this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
         }
         )
       
@@ -188,16 +190,46 @@ export class AuthService implements OnInit {
         let message, status;
           message = res.message;
           status = 'toastSuccess';
-          this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 5000 });
+          this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
       },
       error => {
         let message, status;
         message = error;
         status = 'toastError';
-        this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 5000 });
+        this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
       }
       
     )
   }
 
+
+user(){
+    return this.http.get<User>(`${environment.API}auth/users/${this.currentUserValue.user.id}`).pipe(take(1))
+}
+
+
+ async updateUser(data){
+    return this.http.put<User>(`${environment.API}auth/users/${data.id}`, data)
+    .pipe(
+      map(
+        user => {
+          let currenUser: CurrentUser = this.currentUserSubject.value
+          currenUser.user = user;
+          this.currentUserSubject.next(currenUser)
+          setStorage('currentUser',currenUser)
+
+          let message, status;
+            message = "Actualizado";
+            status = 'toastSuccess';
+            this.snackBar.open(message, '', { panelClass: [status], verticalPosition: 'top', duration: 500 });
+        },
+        error => {
+          let message, status;
+          message = error;
+          status = 'toastError';
+          this.snackBar.open(message, '', { panelClass: [status], verticalPosition: 'top', duration: 500 });
+        }
+      )
+    )
+  }
 }

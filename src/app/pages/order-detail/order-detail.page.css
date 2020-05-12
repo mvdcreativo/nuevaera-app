@@ -1,0 +1,69 @@
+ion-thumbnail {
+  --border-radius: 10px;
+}
+.title,
+.price {
+  font-size: 14px;
+}
+.price {
+  color: #3dc2ff !important;
+  width: 80%;
+}
+.actions {
+  font-size: 12px;
+}
+.detalles {
+  float: right;
+}
+.icon {
+  color: #cccccc;
+}
+.total {
+  float: right;
+  text-align: right;
+}
+.botones {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+.remove {
+  color: #eb445a;
+}
+.text {
+  text-align: center !important;
+  font-size: 14px;
+}
+.zigzag {
+  margin: 20px 0;
+  background: #fff;
+  position: relative;
+  height: 16px;
+  z-index: 1;
+}
+.zigzag:before,
+.zigzag:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.zigzag:before {
+  height: 12px;
+  top: 110%;
+  background: linear-gradient(-135deg, #ccc 8px, transparent 0) 0 8px,
+    linear-gradient(135deg, #ccc 8px, transparent 0) 0 8px;
+  background-position: top left;
+  background-repeat: repeat-x;
+  background-size: 16px 16px;
+}
+.zigzag:after {
+  height: 16px;
+  top: 100%;
+  background: linear-gradient(-135deg, #fff 8px, transparent 0) 0 8px,
+    linear-gradient(135deg, #fff 8px, transparent 0) 0 8px;
+  background-position: top left;
+  background-repeat: repeat-x;
+  background-size: 16px 16px;
+}
