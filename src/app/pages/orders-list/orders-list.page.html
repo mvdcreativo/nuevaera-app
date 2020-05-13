@@ -1,7 +1,7 @@
 <header-component> </header-component>
 
 <ion-content mode="ios">
-  <ng-container *ngIf="orders === [];then list else noItem"></ng-container>
+  <ng-container *ngIf="orders.length >=1;then list else noItem"></ng-container>
 
   <ng-template #list>
     <ion-list >

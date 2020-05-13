@@ -8,7 +8,7 @@ import { OrderService } from 'src/app/modules/orders/services/order.service';
   styleUrls: ['./orders-list.page.scss'],
 })
 export class OrdersListPage implements OnInit {
-  public orders: any;
+  public orders: any= [];
 
   constructor(
     private cartService : CartService,
