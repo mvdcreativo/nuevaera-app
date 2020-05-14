@@ -68,6 +68,18 @@ export class OrderDetailPage implements OnInit {
 
 
     dateTransform(date){
-      return new Date(date).toLocaleString('en-GB')    
+
+      const fechaPart = date.split(/-| /) 
+      
+      const d = fechaPart[2];
+      const m = fechaPart[1];
+      const y = fechaPart[0];
+      const h_m = fechaPart[3].split(":", 2).join(":");
+      const h_m_s = fechaPart[3];
+      
+      const dateFormat = `${d}-${m}-${y}, ${h_m}`;
+  
+      return dateFormat
+  
     }
 }
