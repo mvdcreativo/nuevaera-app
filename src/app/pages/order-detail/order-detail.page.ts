@@ -8,11 +8,13 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { OrderService } from 'src/app/modules/orders/services/order.service';
 import { Order } from 'src/app/modules/orders/interfaces/order';
 import { map, take } from 'rxjs/operators';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-order-detail',
   templateUrl: './order-detail.page.html',
   styleUrls: ['./order-detail.page.scss'],
+  providers: [DatePipe]
 })
 export class OrderDetailPage implements OnInit {
     public cartItems : Observable<CartItem[]> = of([]);
@@ -25,7 +27,8 @@ export class OrderDetailPage implements OnInit {
       private cartService: CartService,
       public actionSheetController: ActionSheetController,
       public activateRouter: ActivatedRoute,
-      private orderService : OrderService
+      private orderService : OrderService,
+      public datePipe: DatePipe
     ) { }
   
     ngOnInit() {
@@ -61,5 +64,10 @@ export class OrderDetailPage implements OnInit {
       )
       
       // this.cartService.addToCart
+    }
+
+
+    dateTransform(date){
+      return this.datePipe.transform(date, 'dd/MM/yyyy, H:mm')
     }
 }

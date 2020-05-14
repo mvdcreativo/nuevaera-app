@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/modules/payment/services/cart.service';
 import { OrderService } from 'src/app/modules/orders/services/order.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-orders-list',
   templateUrl: './orders-list.page.html',
   styleUrls: ['./orders-list.page.scss'],
+  providers: [DatePipe]
 })
 export class OrdersListPage implements OnInit {
   public orders: any= [];
@@ -13,6 +15,7 @@ export class OrdersListPage implements OnInit {
   constructor(
     private cartService : CartService,
     private orderService: OrderService,
+    public datePipe: DatePipe
   ) { }
 
   ngOnInit() {
@@ -34,4 +37,7 @@ export class OrdersListPage implements OnInit {
     
   }
 
+  dateTransform(date){
+    return this.datePipe.transform(date, 'dd/MM/yyyy, H:mm')
+  }
 }
