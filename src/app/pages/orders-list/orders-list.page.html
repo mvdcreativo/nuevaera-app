@@ -13,7 +13,7 @@
       <ion-item *ngFor="let order of orders" lines="none" detail>
         <ion-label [routerLink]="['/order-detail', order.id]">
           <p>
-            Pedido realizado {{ order.created_at | date: 'dd/MM/y h:mm' }}
+            Pedido realizado {{ order.created_at | date:'dd/MM/yyyy, H:mm' }}
           </p>
           <p>
             importe $U {{ order.total | number }}
