@@ -31,7 +31,7 @@ export class AuthService implements OnInit {
     getStorage('currentUser').then(
       user => {
         try{
-          console.log(user);
+          // console.log(user);
           
           this.currentUserSubject.next(user || null)
           if(this.currentUserSubject){
