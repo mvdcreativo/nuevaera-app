@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/modules/auth/auth.service';
 import { first } from 'rxjs/operators';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginPage implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
+    private alertController : AlertController
   ) { }
 
   ngOnInit() {
@@ -83,4 +85,44 @@ export class LoginPage implements OnInit {
   }
 
 
+
+
+  async presentAlertPrompt() {
+    const alert = await this.alertController.create({
+      header: 'Reseteo de contraseña',
+      subHeader: 'Te enviaremos un correo electrónico para que cambies tu contraseña',
+      animated: true,
+      mode:'ios',
+      cssClass: 'input-alert',
+      inputs: [
+        {
+
+          name: 'email',
+          value: '',
+          type: 'email',
+          placeholder: 'Correo electrónico de la cuenta'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Enviar',
+          handler: (res) => {
+            console.log(res);
+            
+            this.authService.solicitaResetPass(res)
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+  }
 }

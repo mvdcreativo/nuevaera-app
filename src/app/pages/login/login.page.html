@@ -31,7 +31,7 @@
       </ion-item>
       
       <ion-item lines="none" class="ion-margin center">
-        <ion-label><a [routerLink]="['/register']" class="register">Olvidé mi contraseña</a></ion-label>
+        <ion-label><a class="register" (click)="presentAlertPrompt()">Olvidé mi contraseña</a></ion-label>
       </ion-item>
       <ion-item lines="none" class="ion-margin center">
         <ion-label><ion-chip color="warning" [routerLink]="['/register']">Registrarme</ion-chip></ion-label>
