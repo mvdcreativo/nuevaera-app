@@ -15,7 +15,6 @@ import { AuthService } from './modules/auth/auth.service';
 })
 export class AppComponent {
   constructor(
-    private authService : AuthService,
     private platform: Platform,
     // private splashScreen: SplashScreen,
     // private statusBar: StatusBar,
@@ -34,7 +33,6 @@ export class AppComponent {
     const { SplashScreen , StatusBar } = Plugins;
     try{
       await SplashScreen.hide();
-      this.authService.currentUserValue
       await StatusBar.setStyle({ style: StatusBarStyle.Light });
       if (this.platform.is('android')){
         StatusBar.setBackgroundColor({ color: '#ffffff'});

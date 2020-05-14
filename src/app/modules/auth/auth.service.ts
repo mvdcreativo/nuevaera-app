@@ -9,17 +9,15 @@ import { getStorage, setStorage, removeStorage } from "src/app/shared/storage/se
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-let currentUser 
-getStorage('currentUser').then(
-  user => currentUser = user
-)
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService implements OnInit {
 
-  private currentUserSubject: BehaviorSubject<CurrentUser> = new BehaviorSubject<CurrentUser>(currentUser);
+  private currentUserSubject: BehaviorSubject<CurrentUser> = new BehaviorSubject(null)
   public currentUser: Observable<CurrentUser>;
   public errorSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null)
   public error$: Observable<any>;
@@ -29,8 +27,27 @@ export class AuthService implements OnInit {
     private http: HttpClient,
     public snackBar: MatSnackBar
   ) {
-    this.currentUser = this.currentUserSubject.asObservable();
-    this.error$ = this.errorSubject.asObservable();
+
+    getStorage('currentUser').then(
+      user => {
+        try{
+          console.log(user);
+          
+          this.currentUserSubject.next(user || null)
+          if(this.currentUserSubject){
+            
+
+          }
+
+        }
+        catch(error){
+          console.log('ERROR', error);
+        }
+        
+      }
+    )
+    this.currentUser = this.currentUserSubject.asObservable()
+    this.error$ = this.errorSubject.asObservable()
 
   }
 

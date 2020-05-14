@@ -61,7 +61,7 @@ export class MenuComponent implements OnInit {
     
      this.authService.currentUser.subscribe(
       user => {
-        // console.log(user);
+        console.log(user);
         
         if(user) {
           this.loged = true
