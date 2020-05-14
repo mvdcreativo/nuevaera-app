@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { Platform, MenuController } from '@ionic/angular';
 import { Plugins, StatusBarStyle  } from "@capacitor/core";
+import { AuthService } from './modules/auth/auth.service';
 // import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -14,6 +15,7 @@ import { Plugins, StatusBarStyle  } from "@capacitor/core";
 })
 export class AppComponent {
   constructor(
+    private authService : AuthService,
     private platform: Platform,
     // private splashScreen: SplashScreen,
     // private statusBar: StatusBar,
@@ -32,6 +34,7 @@ export class AppComponent {
     const { SplashScreen , StatusBar } = Plugins;
     try{
       await SplashScreen.hide();
+      this.authService.currentUserValue
       await StatusBar.setStyle({ style: StatusBarStyle.Light });
       if (this.platform.is('android')){
         StatusBar.setBackgroundColor({ color: '#ffffff'});
