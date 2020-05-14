@@ -38,7 +38,7 @@ export class OrdersListPage implements OnInit {
   }
 
   dateTransform(date){
-    return new Date(date).toLocaleString('en-GB')
+    // return new Date(date).toLocaleString('en-GB')
     // return this.datePipe.transform(date, 'dd/MM/yyyy, H:mm')
   }
 }
