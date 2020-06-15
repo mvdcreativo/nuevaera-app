@@ -9,16 +9,39 @@
     <div class="row" *ngIf="itemAvatarSlides">
       <avatar-slides [slides]="itemAvatarSlides"></avatar-slides>
     </div>
+    <!-- skeleton loading -->
+    <div class="row" style="display: flex; flex-direction: row; margin-top: 5px; margin-bottom: 2rem; width: 110%;" *ngIf="!itemAvatarSlides">
+        <ion-avatar style="width: 70px; height: 70px; margin-right: 1rem;" *ngFor="let item of [1,1,1,1,1]">
+          <ion-skeleton-text animated ></ion-skeleton-text>
+        </ion-avatar>
+    </div>
+    <!--  -->
 
     <div class="row" *ngIf="productsPromocion">
       <p class="title">Productos en Promoción</p>
       <ofers-slides [slides]="productsPromocion"  [configSlide]= "configSlide"></ofers-slides>
     </div>
-
+    <!-- skeleton loading -->
+    <div class="row" *ngIf="!productsPromocion">
+      <p class="title"><ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text></p>
+      <p style="display: flex; flex-direction: row;">
+        <ion-skeleton-text animated style="--border-radius: 10px; width: 70%; height: 80px;"></ion-skeleton-text>
+        <ion-skeleton-text animated style="--border-radius: 10px; margin-left: 16px;width: 30%; height: 80px;"></ion-skeleton-text>
+      </p>
+    </div>
+    <!--  -->
     <div class="row" *ngIf="brands">
       <p class="title">Marcas</p>
       <brands-slides [slides]="brands | slice:0:8"  [configSlide]= "configSlideBrand"></brands-slides>
     </div>
+    <!-- skeleton loading -->
+    <div class="row" *ngIf="!brands">
+      <p class="title"><ion-skeleton-text animated style="width: 30%;"></ion-skeleton-text></p>
+      <p  style="display: flex; flex-direction: row;">
+        <ion-skeleton-text *ngFor="let item of [1,1,1]" animated style="--border-radius: 10px; width: 100px; height: 100px;"></ion-skeleton-text>
+      </p>
+    </div>
+    <!--  -->
     
     <div class="row">
       <p class="title">Productos Populares</p>

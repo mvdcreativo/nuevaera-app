@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 })
 export class OrdersListPage implements OnInit {
   public orders: any= [];
+  noResult: string;
 
   constructor(
     private cartService : CartService,
@@ -22,7 +23,12 @@ export class OrdersListPage implements OnInit {
     const pageSize = {pageSize: "5"}
     this.orderService.getOrders(pageSize).subscribe(
       (res:any)=>{
-        this.orders = res.data
+        if(res.data.length >=1){
+          this.orders = res.data
+
+        }else{
+          this.noResult = "No hay pedidos"
+        }
         console.log(this.orders);
         
       }

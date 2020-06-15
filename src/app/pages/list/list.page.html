@@ -4,18 +4,27 @@
 
 
   <ion-content>
-    <list-product [products]="products"></list-product>
+    <ng-container *ngIf="products.length >= 1 || sinResultados; then listo else loading"></ng-container>
 
-    <div class="inf-scroll">
-      
-      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content 
-          
-          loadingSpinner="dots"
-          loadingText="Cargando...">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </div>
+    <ng-template #listo>
+      <ion-title *ngIf="sinResultados">{{ sinResultados }}</ion-title>
+      <list-product [products]="products"></list-product> 
+      <div class="inf-scroll">
+        
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+          <ion-infinite-scroll-content 
+            
+            loadingSpinner="dots"
+            loadingText="Cargando...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </div>
+
+    </ng-template>
+
+    <ng-template #loading>
+      <skeleton-list [cantItera]="20"></skeleton-list>
+    </ng-template>
 
   </ion-content>
 

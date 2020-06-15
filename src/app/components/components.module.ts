@@ -12,6 +12,7 @@ import { BannerSlidesComponent } from './banner-slides/banner-slides.component';
 import { BrandsSlidesComponent } from './brand-slides/brands-slides.component';
 import { RouterModule } from '@angular/router';
 import { MercadopagoWebComponent } from './mercadopago-web/mercadopago-web.component';
+import { SkeletonListComponent } from './skeleton-list/skeleton-list.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { MercadopagoWebComponent } from './mercadopago-web/mercadopago-web.compo
     AvatarSlidesComponent,
     BannerSlidesComponent,
     BrandsSlidesComponent,
-    MercadopagoWebComponent
+    MercadopagoWebComponent,
+    SkeletonListComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +40,8 @@ import { MercadopagoWebComponent } from './mercadopago-web/mercadopago-web.compo
     AvatarSlidesComponent,
     BannerSlidesComponent,
     BrandsSlidesComponent,
-    MercadopagoWebComponent
+    MercadopagoWebComponent,
+    SkeletonListComponent
 
   ]
 })

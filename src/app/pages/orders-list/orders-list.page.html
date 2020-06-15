@@ -33,12 +33,29 @@
 
   <ng-template #noItem >
 
-    <ion-list>
+    <ion-list >
       <ion-list-header>
-        <ion-label>No tienes pedidos</ion-label>
+        <ion-label><ion-skeleton-text animated style="width: 70%; height: 25px"></ion-skeleton-text></ion-label>
       </ion-list-header>
-
+  
+  
+      <ion-item *ngFor="let item of [1,1,1,1]" lines="none" detail>
+        <ion-label>
+          <p>
+            <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+          </p>
+          <p><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></p>
+          <p>
+            <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+        <ion-text>
+          <ion-skeleton-text animated style="width: 50px; height: 34px"></ion-skeleton-text>
+        </ion-text>
+  
+      </ion-item>
     </ion-list>
+
   </ng-template>
   
 </ion-content>

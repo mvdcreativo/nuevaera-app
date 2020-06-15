@@ -19,6 +19,7 @@ export class ListPage implements OnInit {
   category: any;
   brand: any;
   search: any;
+  sinResultados: string;
 
 
   constructor(
@@ -121,21 +122,27 @@ export class ListPage implements OnInit {
 
 
  private agregaDatos(res){
-    this.products.push(...res.data);
-    this.infiniteScroll.disabled = false
-    this.totalProduct = res.total
-    this.currentPage = res.current_page
-    this.lastPage= res.last_page
+   if(res.data.length >=1){
+     this.products.push(...res.data);
+     this.infiniteScroll.disabled = false
+     this.totalProduct = res.total
+     this.currentPage = res.current_page
+     this.lastPage= res.last_page
+ 
+     console.log(this.totalProduct);
+     console.log(this.currentPage);
+     console.log(this.lastPage);
+ 
+     if(this.lastPage === this.currentPage){
+       this.infiniteScroll.complete();
+       this.infiniteScroll.disabled = true
+     }
+     this.infiniteScroll.complete();
+     this.sinResultados = null
+   }else{
+     this.sinResultados = "No hay productos"
+   }
 
-    console.log(this.totalProduct);
-    console.log(this.currentPage);
-    console.log(this.lastPage);
-
-    if(this.lastPage === this.currentPage){
-      this.infiniteScroll.complete();
-      this.infiniteScroll.disabled = true
-    }
-    this.infiniteScroll.complete();
  }
 
 

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">nueva-era-app</string>
-    <string name="title_activity_main">nueva-era-app</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">Nueva Era</string>
+    <string name="title_activity_main">Nueva Era</string>
+    <string name="package_name">nuevaera.app</string>
+    <string name="custom_url_scheme">nuevaera.app</string>
 </resources>

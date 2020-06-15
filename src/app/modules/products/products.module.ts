@@ -5,6 +5,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { IonicModule } from '@ionic/angular';
 import { MaterialModule } from 'src/app/material/material.module';
 import { RouterModule } from '@angular/router';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 
 
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     IonicModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    ComponentsModule
   ],
   exports: [
     ListProductComponent

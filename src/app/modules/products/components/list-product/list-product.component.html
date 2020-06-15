@@ -1,10 +1,16 @@
 
 
+<ng-container *ngIf="products; then listo else loading"></ng-container>
 
-        <ion-list color="light" class="list">
-            <product-card *ngFor="let product of products" [data]="product"></product-card>
-        </ion-list>
+<ng-template #listo>
+    <ion-list color="light" class="list">
+        <product-card *ngFor="let product of products" [data]="product"></product-card>
+    </ion-list>
+</ng-template>
+<ng-template #loading>
+    <skeleton-list [cantItera]="20"></skeleton-list>
+</ng-template>
 
- 
+        
 
 

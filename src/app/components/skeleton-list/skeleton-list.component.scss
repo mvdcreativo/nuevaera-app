@@ -1,0 +1,24 @@
+
+ion-thumbnail{
+    --border-radius: 10px;
+    --size: 30px;
+    
+
+}
+
+.title, .price{
+    font-size: 14px;
+}
+.price{
+    // color: #3dc2ff!important;
+    width: 80%;
+}
+.actions{
+    position: absolute;
+    right: 16px;
+    bottom: 10px;
+    font-size: 12px;
+}
+ion-label{
+    outline:none!important;
+}
