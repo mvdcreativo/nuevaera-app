@@ -4,4 +4,6 @@
     <string name="title_activity_main">Nueva Era</string>
     <string name="package_name">nuevaera.app</string>
     <string name="custom_url_scheme">nuevaera.app</string>
+    <string name="server_client_id">1083279613786-9siq46f52vqctmkc26tcrq42p1g79gis.apps.googleusercontent.com</string>
+
 </resources>
