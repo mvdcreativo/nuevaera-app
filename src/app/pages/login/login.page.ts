@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+
+
+
+
 import { AuthService } from 'src/app/modules/auth/auth.service';
 import { first } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
@@ -17,20 +21,21 @@ export class LoginPage implements OnInit {
   public error = '';
   public returnUrl: string;
   errorLogin = null;
+  username: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private alertController : AlertController
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
 
     this.errorLogin = this.authService.error$
     console.log(this.errorLogin);
-    
+
 
     this.formLogin = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
@@ -41,22 +46,22 @@ export class LoginPage implements OnInit {
       data => this.returnUrl = data.get('returnUrl')
     );
     this.route.queryParamMap.subscribe(
-      data =>{
+      data => {
         this.returnUrl = data.get('returnUrl')
 
-          if(data.get('email')&&data.get('token')){
-            // this.openNewPassDialog(data)
-          }
-          if(data.get('error')){
-            // console.log(data.get('error'));
-            const error = data.get('error')
-
-            let message, status;
-            message = error;
-            status = 'toastError';
-            this.authService.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 5000 });
-          }
+        if (data.get('email') && data.get('token')) {
+          // this.openNewPassDialog(data)
         }
+        if (data.get('error')) {
+          // console.log(data.get('error'));
+          const error = data.get('error')
+
+          let message, status;
+          message = error;
+          status = 'toastError';
+          this.authService.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 5000 });
+        }
+      }
     );
     // reset login status
 
@@ -84,15 +89,12 @@ export class LoginPage implements OnInit {
 
   }
 
-
-
-
   async presentAlertPrompt() {
     const alert = await this.alertController.create({
       header: 'Reseteo de contraseña',
       subHeader: 'Te enviaremos un correo electrónico para que cambies tu contraseña',
       animated: true,
-      mode:'ios',
+      mode: 'ios',
       cssClass: 'input-alert',
       inputs: [
         {
@@ -115,7 +117,7 @@ export class LoginPage implements OnInit {
           text: 'Enviar',
           handler: (res) => {
             console.log(res);
-            
+
             this.authService.solicitaResetPass(res)
           }
         }
@@ -124,5 +126,25 @@ export class LoginPage implements OnInit {
 
     await alert.present();
 
+  }
+
+
+  /////login Social
+  signInGoogle() {
+    this.authService.signInWithGoogle().then(
+      data => {
+        console.log(data);
+        if (this.returnUrl) {
+          this.router.navigate([this.returnUrl]);
+        } else {
+          this.router.navigate(['/']);
+        }
+      }
+    ).catch(
+      error => {
+        this.error = error;
+        // this.loading = false;
+      }
+    )
   }
 }

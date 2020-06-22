@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter, OnInit } from '@angular/core';
-import { User, CurrentUser } from './interfaces/user';
+import { User, CurrentUser, SocialUser } from './interfaces/user';
 import { Router } from '@angular/router';
 import { map, tap, take } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -9,7 +9,9 @@ import { getStorage, setStorage, removeStorage } from "src/app/shared/storage/se
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
+import "@codetrix-studio/capacitor-google-auth";
+import { Plugins } from '@capacitor/core';
+const { GoogleAuth } = Plugins;
 
 
 @Injectable({
@@ -30,20 +32,20 @@ export class AuthService implements OnInit {
 
     getStorage('currentUser').then(
       user => {
-        try{
+        try {
           // console.log(user);
-          
+
           this.currentUserSubject.next(user || null)
-          if(this.currentUserSubject){
-            
+          if (this.currentUserSubject) {
+
 
           }
 
         }
-        catch(error){
+        catch (error) {
           console.log('ERROR', error);
         }
-        
+
       }
     )
     this.currentUser = this.currentUserSubject.asObservable()
@@ -51,12 +53,12 @@ export class AuthService implements OnInit {
 
   }
 
-  ngOnInit(){
+  ngOnInit() {
 
   }
 
 
-  public  get currentUserValue(): CurrentUser {
+  public get currentUserValue(): CurrentUser {
     if (this.currentUserSubject.value && this.currentUserSubject.value.user) {
       // this.actualizaUser(this.currentUserSubject.value.user.id);
     }
@@ -79,7 +81,7 @@ export class AuthService implements OnInit {
         let currenUser: CurrentUser = this.currentUserSubject.value
         currenUser.user = res;
         this.currentUserSubject.next(currenUser)
-        setStorage('currentUser',currenUser)
+        setStorage('currentUser', currenUser)
 
 
       }
@@ -107,7 +109,7 @@ export class AuthService implements OnInit {
             console.log(user);
 
             // store user details ands token in local storage to keep user logged in between page refreshes
-            setStorage('currentUser',user.user)
+            setStorage('currentUser', user.user)
             this.currentUserSubject.next(user.user);
             // this.router.navigate(['admin'])
             // console.log(user);
@@ -129,7 +131,7 @@ export class AuthService implements OnInit {
           // login successful if there's a jwt token in the response
           if (user && user.token) {
             // store user details ands token in local storage to keep user logged in between page refreshes
-            setStorage('currentUser',user)
+            setStorage('currentUser', user)
             this.currentUserSubject.next(user);
 
             let message, status;
@@ -157,6 +159,7 @@ export class AuthService implements OnInit {
         // remove user from local storage to log user out
         removeStorage('cartItem')
         removeStorage('currentUser')
+        this.signOut()
         this.currentUserSubject.next(null);
         this.router.navigate(['/']);
       },
@@ -180,73 +183,113 @@ export class AuthService implements OnInit {
       ).subscribe(
         res => {
           console.log(res);
-          
+
           let message, status;
-            message = res.message;
-            status = 'toastSuccess';
-            this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
-        },
-        error => {
-          let message, status;
-          message = error;
-          status = 'toastError';
-          this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
-        }
-        )
-      
-  }
-  updatePass(data){
-    return this.http.post<any>(`${environment.API}password/reset`, data)
-    .pipe(
-      take(1)
-    )
-    .subscribe(
-      res => {
-        console.log(res);
-        
-        let message, status;
           message = res.message;
           status = 'toastSuccess';
           this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
-      },
-      error => {
-        let message, status;
-        message = error;
-        status = 'toastError';
-        this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
-      }
-      
-    )
-  }
-
-
-user(){
-    return this.http.get<User>(`${environment.API}auth/users/${this.currentUserValue.user.id}`).pipe(take(1))
-}
-
-
- async updateUser(data){
-    return this.http.put<User>(`${environment.API}auth/users/${data.id}`, data)
-    .pipe(
-      map(
-        user => {
-          let currenUser: CurrentUser = this.currentUserSubject.value
-          currenUser.user = user;
-          this.currentUserSubject.next(currenUser)
-          setStorage('currentUser',currenUser)
-
-          let message, status;
-            message = "Actualizado";
-            status = 'toastSuccess';
-            this.snackBar.open(message, '', { panelClass: [status], verticalPosition: 'top', duration: 500 });
         },
         error => {
           let message, status;
           message = error;
           status = 'toastError';
-          this.snackBar.open(message, '', { panelClass: [status], verticalPosition: 'top', duration: 500 });
+          this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
         }
       )
-    )
+
+  }
+  updatePass(data) {
+    return this.http.post<any>(`${environment.API}password/reset`, data)
+      .pipe(
+        take(1)
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+
+          let message, status;
+          message = res.message;
+          status = 'toastSuccess';
+          this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
+        },
+        error => {
+          let message, status;
+          message = error;
+          status = 'toastError';
+          this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
+        }
+
+      )
+  }
+
+
+  user() {
+    return this.http.get<User>(`${environment.API}auth/users/${this.currentUserValue.user.id}`).pipe(take(1))
+  }
+
+
+  async updateUser(data) {
+    return this.http.put<User>(`${environment.API}auth/users/${data.id}`, data)
+      .pipe(
+        map(
+          user => {
+            let currenUser: CurrentUser = this.currentUserSubject.value
+            currenUser.user = user;
+            this.currentUserSubject.next(currenUser)
+            setStorage('currentUser', currenUser)
+
+            let message, status;
+            message = "Actualizado";
+            status = 'toastSuccess';
+            this.snackBar.open(message, '', { panelClass: [status], verticalPosition: 'top', duration: 500 });
+          },
+          error => {
+            let message, status;
+            message = error;
+            status = 'toastError';
+            this.snackBar.open(message, '', { panelClass: [status], verticalPosition: 'top', duration: 500 });
+          }
+        )
+      )
+  }
+
+  /////LOGIN SOCIAL
+    ///GOOGLE
+  async signInWithGoogle() {
+    let googleUser  = await GoogleAuth.signIn();
+    let credentials: any = {
+      idToken: googleUser.authentication.idToken,
+      provider: "GOOGLE"
+
+    };
+
+    
+    this.http.post<any>(`${environment.API}social-auth`, credentials).pipe(
+      take(1)).
+      subscribe(user => {
+        // login successful if there's a jwt token in the response
+        if (user && user.token) {
+          // store user details ands token in local storage to keep user logged in between page refreshes
+          setStorage('currentUser', user)
+          this.currentUserSubject.next(user);
+
+          let message, status;
+          message = `Hola de nuevo ${user.user.name}, gracias por preferirnos!`;
+          status = 'toastSuccess';
+          this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
+          // this.router.navigate(['admin'])
+          // console.log(user);
+
+        }
+
+        return user;
+      })
+   
+    // console.log(this.user);
+    // console.log(res);
+  
+  }
+  async signOut() {
+    await GoogleAuth.signOut();
   }
 }
