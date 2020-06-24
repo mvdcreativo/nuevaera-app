@@ -11,7 +11,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import "@codetrix-studio/capacitor-google-auth";
 import { Plugins } from '@capacitor/core';
+import { NavController } from '@ionic/angular';
 const { GoogleAuth } = Plugins;
+
+import { FacebookLoginResponse } from '@rdlabo/capacitor-facebook-login';
+const { FacebookLogin } = Plugins;
+// declare var FB: any;
+// import { registerWebPlugin } from '@capacitor/core';
 
 
 @Injectable({
@@ -27,8 +33,34 @@ export class AuthService implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public navCtrl: NavController
   ) {
+    // ///facebook script web login
+    // // This function initializes the FB variable
+    // (function (d, s, id) {
+    //   var js, fjs = d.getElementsByTagName(s)[0];
+    //   if (d.getElementById(id)) { return; }
+    //   js = d.createElement(s); js.id = id;
+    //   js.src = 'https://connect.facebook.net/en_US/sdk.js';
+    //   fjs.parentNode.insertBefore(js, fjs);
+    // }(document, 'script', 'facebook-jssdk'));
+
+
+    // window.fbAsyncInit = () => {
+    //   console.log("fbasyncinit")
+
+    //   FB.init({
+    //     appId: '1138548603145030',
+    //     autoLogAppEvents: true,
+    //     cookie: true,
+    //     xfbml: true,
+    //     version: 'v2.10'
+    //   });
+    //   FB.AppEvents.logPageView();
+    // };
+    // // registerWebPlugin(FacebookLogin);
+    // ////////////end facebook script web login
 
     getStorage('currentUser').then(
       user => {
@@ -254,19 +286,11 @@ export class AuthService implements OnInit {
   }
 
   /////LOGIN SOCIAL
-    ///GOOGLE
-  async signInWithGoogle() {
-    let googleUser  = await GoogleAuth.signIn();
-    let credentials: any = {
-      idToken: googleUser.authentication.idToken,
-      provider: "GOOGLE"
-
-    };
-
-    
+  private loginSocial(credentials){
     this.http.post<any>(`${environment.API}social-auth`, credentials).pipe(
       take(1)).
       subscribe(user => {
+        console.log("usuario "+user);
         // login successful if there's a jwt token in the response
         if (user && user.token) {
           // store user details ands token in local storage to keep user logged in between page refreshes
@@ -278,18 +302,58 @@ export class AuthService implements OnInit {
           status = 'toastSuccess';
           this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
           // this.router.navigate(['admin'])
-          // console.log(user);
+          console.log(user);
 
         }
-
         return user;
+      },
+      error =>{
+        console.log("error " + error);
+        return error
       })
-   
+  }
+  ///GOOGLE
+  async signInWithGoogle() {
+    let googleUser = await GoogleAuth.signIn();
+    let credentials: any = {
+      idToken: googleUser.authentication.idToken,
+      provider: "GOOGLE"
+
+    };
+
+    this.loginSocial(credentials)
     // console.log(this.user);
     // console.log(res);
-  
+
   }
   async signOut() {
     await GoogleAuth.signOut();
+    await FacebookLogin.logout();
   }
+
+
+  ////FACEBOOK
+  async signInFacebook(): Promise<void> {
+
+    const FACEBOOK_PERMISSIONS = ['email'];
+    const facebookUser = await <FacebookLoginResponse>FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
+    let credentials: any = {
+      authToken: facebookUser.accessToken.token,
+      provider: "FACEBOOK",
+      id: facebookUser.accessToken.userId
+    };
+    // console.log(JSON.stringify(facebookUser));
+    
+    if (facebookUser && facebookUser.accessToken) {
+      // Login successful.
+      // console.log("token: "+facebookUser.accessToken);
+      
+      this.loginSocial(credentials)
+    } else {
+      // Cancelled by user.
+      console.log("errorr: ")
+    }
+
+  }
+
 }

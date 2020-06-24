@@ -26,6 +26,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>capacitor</string>
+				<string>fb1138548603145030</string>
 			</array>
 		</dict>
 		<dict>
@@ -36,6 +37,15 @@
 				<string>com.googleusercontent.apps.1083279613786-cvenphm0plhsbuiu0hfprseb3l1t1lls</string>
 			</array>
 		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1138548603145030</string>
+	<key>FacebookDisplayName</key>
+	<string>Wimlov</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fbauth2</string>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>

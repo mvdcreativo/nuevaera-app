@@ -26,21 +26,30 @@
         <label *ngIf="errorLogin">{{ errorLogin | async }}</label>
       </mat-error>
 
-      <ion-item lines="none" class="ion-margin">
+      <ion-item lines="none" class="ion-margin-start ion-margin-end">
         <ion-button shape="round"  type="submit" color="warning">Entrar</ion-button>
       </ion-item>
       
-      <ion-item lines="none" class="ion-margin center">
+      <ion-item lines="none" class="ion-margin-start ion-margin-end center">
         <ion-label><a class="register" (click)="presentAlertPrompt()">Olvidé mi contraseña</a></ion-label>
       </ion-item>
-      <ion-item lines="none" class="ion-margin center">
+      <ion-item lines="none" class="ion-margin-start ion-margin-end center">
         <ion-label><ion-chip color="warning" [routerLink]="['/register']">Registrarme</ion-chip></ion-label>
       </ion-item>
       
+      <ion-item lines="none" class="ion-margin center">
+        <ion-button shape="round" class="btn-google" (click)="signInGoogle()">
+          <ion-icon slot="start" src="../../../assets/images/ico-google.svg" class="ico-google"></ion-icon>
+          Entrar con Google</ion-button>
+      </ion-item>
 
       <ion-item lines="none" class="ion-margin center">
-        <ion-button shape="round" color="warning" (click)="signInGoogle()">entrar con google</ion-button>
+        <ion-button shape="round" class="btn-face" (click)="signInFacebook()">
+          <ion-icon slot="start" src="../../../assets/images/ico-facebook.svg" class="ico-face"></ion-icon>
+          Entrar con Facebook
+        </ion-button>
       </ion-item>     
+
     </form>
     </ion-list>
   </ion-content>

@@ -6,4 +6,7 @@
     <string name="custom_url_scheme">nuevaera.app</string>
     <string name="server_client_id">1083279613786-9siq46f52vqctmkc26tcrq42p1g79gis.apps.googleusercontent.com</string>
 
+    <string name="facebook_app_id">1138548603145030</string>
+    <string name="fb_login_protocol_scheme">fb1138548603145030</string>
+
 </resources>

@@ -13,8 +13,8 @@ ion-button{
     width: 100%;
     height: 100%;
     font-size: 16px;
-    margin-top: 2rem;
-    padding-bottom: 2rem;
+    // margin-top: 1rem;
+    // padding-bottom: 2rem;
 }
 .register{
     color: #3dc2ff;
@@ -49,3 +49,18 @@ ion-img{
         padding-right: 1rem!important;
     
 }
+.btn-google{
+    --background: #FFFFFF!important;
+    --color : rgb(0,0,0,54%)!important;
+    --border-color:#1877F2!important;
+    --border-style: solid;
+    --border-width: 1px;
+    // .ico-google{
+    //     color:#1877F2
+    // }
+  }
+  .btn-face{
+      --background: #3578E5!important;
+      --color: white!important;
+  }
+  

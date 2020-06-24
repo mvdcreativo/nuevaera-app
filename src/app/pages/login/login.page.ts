@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-
-
-
 import { AuthService } from 'src/app/modules/auth/auth.service';
 import { first } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
@@ -29,7 +26,9 @@ export class LoginPage implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private alertController: AlertController
-  ) { }
+  ) { 
+    
+  }
 
   ngOnInit() {
 
@@ -130,10 +129,30 @@ export class LoginPage implements OnInit {
 
 
   /////login Social
+  //GOOGLE
   signInGoogle() {
     this.authService.signInWithGoogle().then(
       data => {
         console.log(data);
+        if (this.returnUrl) {
+          this.router.navigate([this.returnUrl]);
+        } else {
+          this.router.navigate(['/']);
+        }
+      }
+    ).catch(
+      error => {
+        this.error = error;
+        // this.loading = false;
+      }
+    )
+  }
+
+  //FACEBOOK
+  signInFacebook(){
+    this.authService.signInFacebook().then(
+      data => {
+        // console.log("data "+data);
         if (this.returnUrl) {
           this.router.navigate([this.returnUrl]);
         } else {
