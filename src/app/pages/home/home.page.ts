@@ -6,6 +6,10 @@ import { AvatarSlides } from 'src/app/components/avatar-slides/Interface/avatar-
 import { ProductService } from 'src/app/modules/products/services/product.service';
 import { Product, Brand } from 'src/app/interfaces/product';
 import { BrandsService } from 'src/app/modules/brands/services/brands.service';
+import { CarouselService } from 'src/app/components/banner-slides/services/carousel.service';
+import { ImagesSlide } from 'src/app/components/banner-slides/interfaces/carousel';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-home',
@@ -17,43 +21,30 @@ export class HomePage implements OnInit {
   productsPopular: Product[];
   brands: Brand[];
   productsPromocion: Product[];
+  banner_slides: ImagesSlide[];
 
   constructor(
     private menuServices : MenuService,
     private _productService: ProductService,
-    private _brandService: BrandsService
+    private _brandService: BrandsService,
+    private carouselService: CarouselService
   ) { }
 
-  ////Slide Banner
-  public banner_slides: Slides[] =[
-    {
-      title: "",
-      text: "",
-      src_image: "../../../assets/images/en-casa.jpeg",
-      url_link: "",
-    },
-    {
-      title: "",
-      text: "",
-      src_image: "../../../assets/images/envio-express.jpeg",
-      url_link: "",
-    },
-    {
-      title: "",
-      text: "",
-      src_image: "../../../assets/images/envio.jpeg",
-      url_link: "",
-    },
-  ]
-
-  //////////////////
 
 
 
   ngOnInit() {
+    this.getBannerImages()
     this.itemsSlideCategories()
     this.getProducts()
     this.itemsSlideBrands()
+  }
+
+  getBannerImages(){
+
+    this.carouselService.carouselActive().subscribe(
+      res=> this.banner_slides = res.images
+    )
   }
 
 
@@ -61,8 +52,10 @@ export class HomePage implements OnInit {
     this.menuServices.categories().pipe(take(1)).subscribe(res=>{ 
       const avatar_slides = res
       this.itemAvatarSlides = avatar_slides.map( v => {
-        return {id:v.id, title:v.name, src_image: `../../../assets/images/${v.slug}.svg`}
+        return {id:v.id, title:v.name, src_image: `${environment.urlFiles}images/icons-app/${v.slug}.svg`}
       })
+
+      
       // console.log(this.itemAvatarSlides);
       
     })

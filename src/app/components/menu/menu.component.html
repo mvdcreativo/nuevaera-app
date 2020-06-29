@@ -24,8 +24,8 @@
     </ion-item-divider>
 
     <ion-list >
-      <ion-item lines="none" inset="true" *ngFor="let item of itemsCategory | async" detail (click)="onClickLink(item.id)">
-        <mat-icon slot="start" [svgIcon]="item.slug"></mat-icon>
+      <ion-item lines="none" inset="true" *ngFor="let item of itemsCategory" detail (click)="onClickLink(item.id)">
+        <img class="img-ico" slot="start" [src]="item.ico">
         <ion-label>{{ item.name }}</ion-label>
         
       </ion-item>
