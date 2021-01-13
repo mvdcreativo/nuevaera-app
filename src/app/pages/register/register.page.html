@@ -4,7 +4,7 @@
 <ion-content mode="ios">
   <ion-list>
     <ion-item lines="none" class="ion-margin logo">
-      <ion-img src="../../assets/logo.png"></ion-img>
+      <ion-img src="../../assets/logo.svg"></ion-img>
     </ion-item>
 
     <ion-list-header>
@@ -44,8 +44,11 @@
   
 </form>
     <ion-item lines="none" class="ion-margin center">
-      <ion-label><ion-chip color="warning" [routerLink]="['/register']">Iniciar Sesión</ion-chip></ion-label>
+      <ion-label><ion-chip color="warning" [routerLink]="['/login']">Iniciar Sesión</ion-chip></ion-label>
     </ion-item>
 
   </ion-list>
+  <ion-item lines="none" class="ion-margin-start ion-margin-end center">
+    <ion-label><a class="politica" href="https://api.nuevaerauruguay.com/storage/politica/terminos-condiciones.pdf">Políticas de uso y privacidad</a></ion-label>
+  </ion-item>
 </ion-content>

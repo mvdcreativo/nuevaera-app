@@ -2,7 +2,7 @@
   <ion-header  class="ion-no-border">
     <ion-toolbar color="principal">
       
-        <ion-img slot="start" src="../../../assets/logo.png"></ion-img>
+        <ion-img  class="logo"  src="../../../assets/logo.svg"></ion-img>
         <ion-icon slot="end" (click)="close()" name="arrow-back-outline" class="ion-padding"></ion-icon>
       
     </ion-toolbar>
@@ -12,11 +12,13 @@
     <ion-list *ngIf="!loged">
       <ion-item-divider color="light">
       </ion-item-divider>
-      <ion-item lines="none" detail>
-        <ion-label color="warning" (click)="login()">Iniciar Sesión</ion-label>
+      <ion-item class="session-btn" lines="none" detail>
+        <ion-label  (click)="login()">Iniciar Sesión</ion-label>
+        <ion-icon slot="end" name="enter-outline" color="medium"></ion-icon>
       </ion-item>
-      <ion-item lines="none" detail>
-        <ion-label color="warning" (click)="register()">Registrarme</ion-label>
+      <ion-item class="session-btn" lines="none" detail>
+        <ion-label  (click)="register()">Registrarme</ion-label>
+        <ion-icon slot="end" name="send-outline" color="medium"></ion-icon>
       </ion-item>
     </ion-list>
     

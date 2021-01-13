@@ -19,7 +19,7 @@
 
     <div class="row" *ngIf="productsPromocion">
       <p class="title">Productos en Promoción</p>
-      <ofers-slides [slides]="productsPromocion"  [configSlide]= "configSlide"></ofers-slides>
+      <ofers-slides [slides]="productsPromocion | slice:0:6"  [configSlide]= "configSlide"></ofers-slides>
     </div>
     <!-- skeleton loading -->
     <div class="row" *ngIf="!productsPromocion">
@@ -45,7 +45,7 @@
     
     <div class="row">
       <p class="title">Productos Populares</p>
-      <list-product [products]="productsPopular | slice:0:50"></list-product>
+      <list-product [products]="productsPromocion | slice:0:10"></list-product>
     </div>
 
   </ion-content>

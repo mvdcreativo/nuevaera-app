@@ -22,14 +22,21 @@ ion-button{
     text-align: center;
     justify-items: center!important;
     justify-content: center!important;
+
+
+    ion-img{
+        width: 80%;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
-ion-img{
-    margin-left: auto;
-    margin-right: auto;
-}
-.register{
+.register, .politica{
     color: #3dc2ff;
     text-decoration: none;
+}
+.politica{
+    font-size: 12px;
 }
 
 .center{

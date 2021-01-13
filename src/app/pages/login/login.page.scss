@@ -16,19 +16,26 @@ ion-button{
     // margin-top: 1rem;
     // padding-bottom: 2rem;
 }
-.register{
+.register, .politica{
     color: #3dc2ff;
     text-decoration: none;
+}
+.politica{
+    font-size: 12px;
 }
 .logo{
     display: flex;
     text-align: center;
     justify-items: center!important;
     justify-content: center!important;
-}
-ion-img{
-    margin-left: auto;
-    margin-right: auto;
+
+
+    ion-img{
+        width: 80%;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 .center{
     text-align: center;
@@ -51,13 +58,21 @@ ion-img{
 }
 .btn-google{
     --background: #FFFFFF!important;
-    --color : rgb(0,0,0,54%)!important;
+    --color : #1877F2!important;
     --border-color:#1877F2!important;
     --border-style: solid;
     --border-width: 1px;
-    // .ico-google{
-    //     color:#1877F2
-    // }
+    color:#1877F2;
+    .ico-google{
+        color:#1877F2;
+    }
+    &:active{
+        color:#FFFFFF;
+        .ico-google{
+            color:#FFFFFF;
+
+        }
+    }
   }
   .btn-face{
       --background: #3578E5!important;
