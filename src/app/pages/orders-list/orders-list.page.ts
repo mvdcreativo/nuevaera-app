@@ -10,7 +10,7 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class OrdersListPage implements OnInit {
-  public orders: any= [];
+  public orders: any[];
   noResult: string;
 
   constructor(
@@ -27,9 +27,9 @@ export class OrdersListPage implements OnInit {
           this.orders = res.data
 
         }else{
-          this.noResult = "No hay pedidos"
+          this.orders = []
         }
-        console.log(this.orders);
+        // console.log(this.orders);
         
       }
     )

@@ -1,14 +1,21 @@
 <header-component> </header-component>
 
 <ion-content mode="ios">
-  <ng-container *ngIf="orders.length >=1;then list else noItem"></ng-container>
+  <ng-container *ngIf="orders; then list else noItem"></ng-container>
 
   <ng-template #list>
     <ion-list >
       <ion-list-header>
         <ion-label>Mis últimos pedidos</ion-label>
       </ion-list-header>
-  
+      
+      <ion-item lines="none" *ngIf="orders.length == 0">
+        <ion-label>
+          <p>
+            Aún no has realizado pedidos.
+          </p>
+        </ion-label>
+      </ion-item>
   
       <ion-item *ngFor="let order of orders" lines="none" detail>
         <ion-label [routerLink]="['/order-detail', order.id]">
