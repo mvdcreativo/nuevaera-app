@@ -82,6 +82,7 @@ export class HomePage implements OnInit {
   configSlide = {
     slidesPerView: 1.2,
     spaceBetween: 5,
+    setInitialSlider: 2,
     // centeredSlides: false,
     pagination: false
   }

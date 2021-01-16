@@ -1,8 +1,11 @@
+<div class="background">
 
-  <header-component [backButton]="false"> </header-component>
+
+  <div class="top-space"></div>
+<header-component [backButton]="false"> </header-component>
   
   <ion-content>
-    <div class="row"  *ngIf="banner_slides">
+    <div class="row banner"  *ngIf="banner_slides">
       <banner-slides [slides]="banner_slides"></banner-slides>
     </div>
 
@@ -49,4 +52,4 @@
     </div>
 
   </ion-content>
-
+</div>

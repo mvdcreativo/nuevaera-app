@@ -287,10 +287,11 @@ export class AuthService implements OnInit {
 
   /////LOGIN SOCIAL
   private loginSocial(credentials){
-    this.http.post<any>(`${environment.API}social-auth`, credentials).pipe(
-      take(1)).
+    console.log(JSON.stringify(credentials));
+    
+    this.http.post<any>(`${environment.API}social-auth`, credentials).
       subscribe(user => {
-        console.log("usuario "+user);
+        
         // login successful if there's a jwt token in the response
         if (user && user.token) {
           // store user details ands token in local storage to keep user logged in between page refreshes
@@ -302,9 +303,9 @@ export class AuthService implements OnInit {
           status = 'toastSuccess';
           this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
           // this.router.navigate(['admin'])
-          console.log(user);
-
+          
         }
+        console.log(user);
         return user;
       },
       error =>{
@@ -318,9 +319,10 @@ export class AuthService implements OnInit {
     let credentials: any = {
       idToken: googleUser.authentication.idToken,
       provider: "GOOGLE"
-
+      
+      
     };
-
+    console.log(credentials);
     this.loginSocial(credentials)
     // console.log(this.user);
     // console.log(res);

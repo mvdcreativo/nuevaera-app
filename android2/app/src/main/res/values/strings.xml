@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Nueva Era</string>
+    <string name="title_activity_main">Nueva Era</string>
+    <string name="package_name">nuevaera.app</string>
+    <string name="custom_url_scheme">nuevaera.app</string>
+    <string name="server_client_id">1083279613786-9siq46f52vqctmkc26tcrq42p1g79gis.apps.googleusercontent.com</string>
+
+    <string name="facebook_app_id">1138548603145030</string>
+    <string name="fb_login_protocol_scheme">fb1138548603145030</string>
+
+</resources>

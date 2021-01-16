@@ -35,7 +35,7 @@ export class AppComponent {
       await SplashScreen.hide();
       await StatusBar.setStyle({ style: StatusBarStyle.Light });
       if (this.platform.is('android')){
-        StatusBar.setBackgroundColor({ color: '#ffffff'});
+        StatusBar.setBackgroundColor({ color: '#FFE20D'});
       }
 
     }catch ( err ){

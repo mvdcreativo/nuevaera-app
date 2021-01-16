@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActivatedRoute, Params } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -16,7 +15,6 @@ export class PagoPage implements OnInit {
 
   
   constructor(
-    private browser: InAppBrowser,
     private activateRoute: ActivatedRoute
     ) { }
 
@@ -29,7 +27,6 @@ export class PagoPage implements OnInit {
           const orderId = params.params.idOrder
           const url = `${environment.urlPago}/${orderId}`
           this.url = url;
-
         }
       }
     )

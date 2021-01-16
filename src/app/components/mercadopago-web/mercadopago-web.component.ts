@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import { ActivatedRoute, Params } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { BrowserOpenOptions, Plugins } from '@capacitor/core';
+
+const { Browser } = Plugins;
 
 @Component({
   selector: 'mercadopago-web',
@@ -11,31 +13,15 @@ import { environment } from 'src/environments/environment';
 export class MercadopagoWebComponent implements OnInit {
 @Input() url: string;
 
-options : InAppBrowserOptions = {
-  location : 'yes',//Or 'no' 
-  hidden : 'no', //Or  'yes'
-  clearcache : 'yes',
-  clearsessioncache : 'yes',
-  zoom : 'no',//Android only ,shows browser zoom controls 
-  hardwareback : 'yes',
-  mediaPlaybackRequiresUserAction : 'no',
-  shouldPauseOnSuspend : 'no', //Android only 
-  closebuttoncaption : 'Volver', //iOS only
-  disallowoverscroll : 'no', //iOS only 
-  toolbar : 'yes', //iOS only 
-  enableViewportScale : 'no', //iOS only 
-  allowInlineMediaPlayback : 'no',//iOS only 
-  presentationstyle : 'pagesheet',//iOS only 
-  fullscreen : 'yes',//Windows only
-  hideurlbar: "yes",
-  toolbarcolor: '#ffffff',
-  toolbarposition: 'top',
+options : BrowserOpenOptions = {
+  url:"",
+  toolbarColor: '#ffffff',
+  presentationStyle : 'popover',//iOS only 
 
 
 };
 
   constructor(
-    private browser: InAppBrowser,
     private activateRoute: ActivatedRoute
   ) { }
 
@@ -46,7 +32,12 @@ options : InAppBrowserOptions = {
 
 
   openUrl(url){
-    const browser = this.browser.create(url,'_self', this.options);
+    this.options.url= url;
+    Browser.open(this.options)
+      .then(res=>console.log(res))
+      .catch(err=>console.log(err));
+
+
 
     // // browser.executeScript(...);
 

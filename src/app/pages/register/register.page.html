@@ -1,3 +1,4 @@
+<div class="top-space"></div>
 <header-component></header-component>
 
 
@@ -39,7 +40,7 @@
   </mat-error>
   
   <ion-item lines="none" class="ion-margin">
-    <ion-button shape="round" type="submit" color="warning">Registrarme</ion-button>
+    <ion-button shape="round" type="submit" [disabled]="!formRegister.valid" color="warning">Registrarme</ion-button>
   </ion-item>
   
 </form>

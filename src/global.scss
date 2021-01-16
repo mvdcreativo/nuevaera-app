@@ -79,3 +79,20 @@ ion-card{
 ion-skeleton-text{
     --border-radius: 50px
 }
+
+
+.background{
+
+    ion-toolbar{
+        --background:#FFE20D!important;
+    }
+}
+.top-space{
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 1rem;
+    display: block;
+    background-color: #FFE20D!important;
+}

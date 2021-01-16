@@ -5,10 +5,16 @@ img{
     object-fit: cover;
     object-position: center;
     max-height: 300px;
-    
+    // /* offset-x | offset-y | blur-radius | spread-radius | color */
+    // box-shadow: 1px 1px 8px 0px rgba(0, 0, 0, 0.075);    
 }
+.img-content{
+    height: 190px;
+}
+
 ion-slide{
-    padding: 1rem;
+    padding: 1rem 0;
+    width: 90%;
     display: flex;
     justify-items: left!important;
     justify-content: left!important;

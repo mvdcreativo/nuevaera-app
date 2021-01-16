@@ -11,3 +11,21 @@
     // margin-top: 0px;
    
 }
+.banner{
+    min-height: 30%;
+    background: linear-gradient(to bottom, #FFE20D 0%, #FFFFFF 80%, #FFFFFF 100%);
+}
+ion-content{
+    background-color: transparent!important;
+    --background: transparent!important;
+    background: transparent!important;
+}
+ion-header, header-component{
+    background-color: #FFE20D!important;
+    --background: #FFE20D!important
+}
+.background{
+
+    height: 100%;
+    // --ion-background-color: red!important;
+}
