@@ -19,6 +19,7 @@ export class AppComponent {
     // private splashScreen: SplashScreen,
     // private statusBar: StatusBar,
   ) {
+
     this.initializeApp();
   }
 
@@ -32,15 +33,27 @@ export class AppComponent {
   async initializeApp(){
     const { SplashScreen , StatusBar } = Plugins;
     try{
-      await SplashScreen.hide();
-      await StatusBar.setStyle({ style: StatusBarStyle.Light });
+      await StatusBar.setStyle({ style: StatusBarStyle.Light});
+      console.log(JSON.stringify(StatusBar.getInfo()) );
+       
       if (this.platform.is('android')){
-        StatusBar.setBackgroundColor({ color: '#FFE20D'});
+        await StatusBar.setStyle({ style: StatusBarStyle.Light });
+        await StatusBar.setBackgroundColor({ color: '#FFE20D'});
       }
-
+      // await SplashScreen.hide();
+      
     }catch ( err ){
       console.log('Normal en browser', err);
     }
+
+    this.darkMode()
+  }
+
+
+  ////////DARK THEME
+  darkMode(){
+      // Use matchMedia to check the user preference
+      document.body.classList.toggle('dark', false);
   }
 
 }

@@ -3,7 +3,6 @@
 
   <div class="top-space"></div>
 <header-component [backButton]="false"> </header-component>
-  
   <ion-content>
     <div class="row banner"  *ngIf="banner_slides">
       <banner-slides [slides]="banner_slides"></banner-slides>
@@ -22,7 +21,7 @@
 
     <div class="row" *ngIf="productsPromocion">
       <p class="title">Productos en Promoción</p>
-      <ofers-slides [slides]="productsPromocion | slice:0:6"  [configSlide]= "configSlide"></ofers-slides>
+      <ofers-slides [slides]="productsPromocion | slice:0:6"  [configSlide]= "configSlidePromocion"></ofers-slides>
     </div>
     <!-- skeleton loading -->
     <div class="row" *ngIf="!productsPromocion">

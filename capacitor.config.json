@@ -1,5 +1,5 @@
 {
-  "appId": "com.nuevaera.app",
+  "appId": "nuevaera.app",
   "appName": "Nueva Era",
   "bundledWebRuntime": false,
   "npmClient": "npm",
@@ -8,9 +8,26 @@
 
   "plugins": {
     "GoogleAuth": {
-      "scopes": ["profile", "email"],
+      "scopes": [
+        "profile",
+        "email"
+      ],
       "serverClientId": "1083279613786-9siq46f52vqctmkc26tcrq42p1g79gis.apps.googleusercontent.com",
-      "forceCodeForRefreshToken" : true
+      "forceCodeForRefreshToken": true
+    },
+    "SplashScreen": {
+      "launchShowDuration": 5000,
+      "fadeOutDuration": 300,
+      "launchAutoHide": true,
+      "backgroundColor": "#ffffffff",
+      "androidSplashResourceName": "splash",
+      "androidScaleType": "CENTER_CROP",
+      "androidSpinnerStyle": "large",
+      "iosSpinnerStyle": "small",
+      "spinnerColor": "#999999",
+      "showSpinner": true,
+      "splashFullScreen": true,
+      "splashImmersive": true
     }
   }
 }

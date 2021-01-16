@@ -21,7 +21,22 @@ export class AvatarSlidesComponent implements OnInit {
     slidesPerView: 4.5,
     spaceBetween: 10,
     centeredSlides: false,
-    pagination: false
+    pagination: false,
+    breakpoints: {
+      1024: {
+          slidesPerView: 6.5, 
+          spaceBetween: 20
+      },
+      768: {
+          slidesPerView: 6.5,
+          spaceBetween: 10
+      },
+      640: {
+          slidesPerView: 4.5,
+          spaceBetween: 10
+      },
+
+    }
   }
 
   onClickLink(item){

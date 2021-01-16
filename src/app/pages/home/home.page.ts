@@ -22,13 +22,18 @@ export class HomePage implements OnInit {
   brands: Brand[];
   productsPromocion: Product[];
   banner_slides: ImagesSlide[];
+  dark: boolean = false;
 
   constructor(
     private menuServices : MenuService,
     private _productService: ProductService,
     private _brandService: BrandsService,
-    private carouselService: CarouselService
-  ) { }
+    private carouselService: CarouselService,
+
+  ) {
+
+
+   }
 
 
 
@@ -38,6 +43,9 @@ export class HomePage implements OnInit {
     this.itemsSlideCategories()
     this.getProducts()
     this.itemsSlideBrands()
+
+
+
   }
 
   getBannerImages(){
@@ -79,12 +87,27 @@ export class HomePage implements OnInit {
       }
     )
   }
-  configSlide = {
+  configSlidePromocion = {
     slidesPerView: 1.2,
     spaceBetween: 5,
     setInitialSlider: 2,
     // centeredSlides: false,
-    pagination: false
+    pagination: false,
+    breakpoints: {
+      1024: {
+          slidesPerView: 3.2, 
+          spaceBetween: 20
+      },
+      768: {
+          slidesPerView: 2.1,
+          spaceBetween: 10
+      },
+      640: {
+          slidesPerView: 1.3,
+          spaceBetween: 5
+      },
+
+    }
   }
 
 
@@ -105,6 +128,21 @@ export class HomePage implements OnInit {
     slidesPerView: 3.5,
     spaceBetween: 10,
     // centeredSlides: false,
-    pagination: false
+    pagination: false,
+    breakpoints: {
+      1024: {
+          slidesPerView: 6, 
+          spaceBetween: 40
+      },
+      768: {
+          slidesPerView: 6,
+          spaceBetween: 30
+      },
+      640: {
+          slidesPerView: 4,
+          spaceBetween: 10
+      },
+
+    }
   }
 }
