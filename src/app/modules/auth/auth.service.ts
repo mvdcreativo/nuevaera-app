@@ -10,10 +10,17 @@ import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import "@codetrix-studio/capacitor-google-auth";
-import { Plugins } from '@capacitor/core';
+import { Plugins, registerWebPlugin } from '@capacitor/core';
 import { NavController } from '@ionic/angular';
 const { GoogleAuth } = Plugins;
-const { SignInWithApple } = Plugins
+import {
+  SignInWithApple,
+  // SignInWithApplePluginResponse,
+  SignInWithAppleOptions,
+  SignInWithAppleResponse,
+} from "@capacitor-community/apple-sign-in";
+
+registerWebPlugin(SignInWithApple);
 
 import { FacebookLoginResponse } from '@rdlabo/capacitor-facebook-login';
 const { FacebookLogin } = Plugins;
@@ -363,10 +370,25 @@ export class AuthService implements OnInit {
   ////APPLES
   async signApple(): Promise<void> {
 
-    SignInWithApple.Authorize().then(response => {
-      console.log(response)
-    }).catch(response => {
-      console.error(response)
-    })
+    let options: SignInWithAppleOptions = {
+      clientId: "com.nuevaera.app",
+      redirectURI: "https://nuevaerauruguay.com/login",
+      // scope: "email name",
+      state: "12345",
+      nonce: "nonce",
+    };
+    
+    Plugins.SignInWithApple.authorize(options)
+      .then((result: SignInWithAppleResponse) => {
+        console.log(result);
+        
+        // Handle user information
+        // Validate token with server and create new session
+      })
+      .catch((error) => {
+        console.log(error);
+        
+        // Handle error
+      });
   }
 }
