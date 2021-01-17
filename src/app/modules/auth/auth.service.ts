@@ -13,6 +13,7 @@ import "@codetrix-studio/capacitor-google-auth";
 import { Plugins } from '@capacitor/core';
 import { NavController } from '@ionic/angular';
 const { GoogleAuth } = Plugins;
+const { SignInWithApple } = Plugins
 
 import { FacebookLoginResponse } from '@rdlabo/capacitor-facebook-login';
 const { FacebookLogin } = Plugins;
@@ -358,4 +359,14 @@ export class AuthService implements OnInit {
 
   }
 
+
+  ////APPLES
+  async signApple(): Promise<void> {
+
+    SignInWithApple.Authorize().then(response => {
+      console.log(response)
+    }).catch(response => {
+      console.error(response)
+    })
+  }
 }

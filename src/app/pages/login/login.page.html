@@ -37,22 +37,29 @@
       <ion-item lines="none" class="ion-margin-start ion-margin-end center">
         <ion-label><ion-chip color="warning" [routerLink]="['/register']">Registrarme</ion-chip></ion-label>
       </ion-item>
+
+      <ion-item lines="none" *ngIf="platform === 'ios'" class="ion-margin center">
+        <ion-button shape="round" color="none" class="btn-apple" (click)="signInApple()">
+          <ion-icon slot="start" name="logo-apple" class="ico-apple"></ion-icon>
+          Entrar con Apple
+        </ion-button>
+      </ion-item>
       
       <ion-item lines="none" class="ion-margin center">
-        <ion-button shape="round" class="btn-google" (click)="signInGoogle()">
+        <ion-button shape="round" color="none" class="btn-google" (click)="signInGoogle()">
           <ion-icon slot="start" name="logo-google" class="ico-google"></ion-icon>
           Entrar con Google</ion-button>
       </ion-item>
 
       <ion-item lines="none" class="ion-margin center">
-        <ion-button shape="round" class="btn-face" (click)="signInFacebook()">
-          <ion-icon slot="start" src="../../../assets/images/ico-facebook.svg" class="ico-face"></ion-icon>
+        <ion-button shape="round" color="none" class="btn-face" (click)="signInFacebook()">
+          <ion-icon slot="start" name="logo-facebook" class="ico-face"></ion-icon>
           Entrar con Facebook
         </ion-button>
       </ion-item>     
 
     </form>
-    <ion-item lines="none" class="ion-margin-start ion-margin-end center">
+    <ion-item lines="none" color="none" class="ion-margin-start ion-margin-end center">
       <ion-label><a class="politica" href="https://api.nuevaerauruguay.com/storage/politica/terminos-condiciones.pdf">Políticas de uso y privacidad</a></ion-label>
     </ion-item>
     </ion-list>

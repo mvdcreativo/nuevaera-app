@@ -5,6 +5,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/modules/auth/auth.service';
 import { first } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import { Plugins } from '@capacitor/core';
+
+const { Device } = Plugins
 
 @Component({
   selector: 'app-login',
@@ -19,6 +22,7 @@ export class LoginPage implements OnInit {
   public returnUrl: string;
   errorLogin = null;
   username: string;
+  platform: "ios" | "android" | "electron" | "web";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,6 +36,8 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
 
+
+    this.devicePlatform()
     this.errorLogin = this.authService.error$
     console.log(this.errorLogin);
 
@@ -66,6 +72,11 @@ export class LoginPage implements OnInit {
 
   }
 
+  async devicePlatform(){
+    let device = await Device.getInfo()
+    this.platform = device.platform;
+    console.log(this.platform);
+  }
 
   onSubmitLogin() {
     this.submitted = true;
@@ -129,6 +140,27 @@ export class LoginPage implements OnInit {
 
 
   /////login Social
+  //APPLE
+  signInApple() {
+    
+    this.authService.signApple().then(
+      data => {
+        console.log(data);
+        // if (this.returnUrl) {
+        //   this.router.navigate([this.returnUrl]);
+        // } else {
+        //   this.router.navigate(['/']);
+        // }
+      }
+    ).catch(
+      error => {
+        this.error = error;
+        // this.loading = false;
+      }
+    )
+  }
+
+
   //GOOGLE
   signInGoogle() {
     this.authService.signInWithGoogle().then(
