@@ -131,39 +131,39 @@ export class LoginPage implements OnInit {
   /////login Social
   //GOOGLE
   signInGoogle() {
-    this.authService.signInWithGoogle().then(
-      data => {
-        console.log(data);
-        if (this.returnUrl) {
-          this.router.navigate([this.returnUrl]);
-        } else {
-          this.router.navigate(['/']);
-        }
-      }
-    ).catch(
-      error => {
-        this.error = error;
-        // this.loading = false;
-      }
-    )
+    // this.authService.signInWithGoogle().then(
+    //   data => {
+    //     console.log(data);
+    //     if (this.returnUrl) {
+    //       this.router.navigate([this.returnUrl]);
+    //     } else {
+    //       this.router.navigate(['/']);
+    //     }
+    //   }
+    // ).catch(
+    //   error => {
+    //     this.error = error;
+    //     // this.loading = false;
+    //   }
+    // )
   }
 
   //FACEBOOK
   signInFacebook(){
-    this.authService.signInFacebook().then(
-      data => {
-        // console.log("data "+data);
-        if (this.returnUrl) {
-          this.router.navigate([this.returnUrl]);
-        } else {
-          this.router.navigate(['/']);
-        }
-      }
-    ).catch(
-      error => {
-        this.error = error;
-        // this.loading = false;
-      }
-    )
+    // this.authService.signInFacebook().then(
+    //   data => {
+    //     // console.log("data "+data);
+    //     if (this.returnUrl) {
+    //       this.router.navigate([this.returnUrl]);
+    //     } else {
+    //       this.router.navigate(['/']);
+    //     }
+    //   }
+    // ).catch(
+    //   error => {
+    //     this.error = error;
+    //     // this.loading = false;
+    //   }
+    // )
   }
 }
