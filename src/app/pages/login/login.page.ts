@@ -23,6 +23,7 @@ export class LoginPage implements OnInit {
   errorLogin = null;
   username: string;
   platform: "ios" | "android" | "electron" | "web";
+  osVersion: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -75,6 +76,7 @@ export class LoginPage implements OnInit {
   async devicePlatform(){
     let device = await Device.getInfo()
     this.platform = device.platform;
+    this.osVersion = parseInt(device.osVersion) ;
     console.log(this.platform);
   }
 
