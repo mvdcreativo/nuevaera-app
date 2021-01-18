@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { SkeletonListComponent } from './skeleton-list.component';
@@ -7,7 +7,7 @@ describe('SkeletonListComponent', () => {
   let component: SkeletonListComponent;
   let fixture: ComponentFixture<SkeletonListComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ SkeletonListComponent ],
       imports: [IonicModule.forRoot()]

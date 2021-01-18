@@ -10,7 +10,7 @@ import { IonInfiniteScroll } from '@ionic/angular';
   styleUrls: ['./list.page.scss'],
 })
 export class ListPage implements OnInit {
-  @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll : IonInfiniteScroll
+  @ViewChild(IonInfiniteScroll) infiniteScroll : IonInfiniteScroll
     
   products: Product[] = [];
   totalProduct: number = 0;
