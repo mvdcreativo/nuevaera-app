@@ -31,7 +31,7 @@
     "@rdlabo/capacitor-facebook-login": "^2.0.3",
     "core-js": "^2.5.4",
     "firebase": "^8.2.3",
-    "rxjs": "~6.5.1",
+    "rxjs": "~6.6.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.10.3"
   },
