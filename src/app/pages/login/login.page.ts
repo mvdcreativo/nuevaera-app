@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from 'src/app/modules/auth/auth.service';
-import { first } from 'rxjs/operators';
 import { AlertController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
 
   public formLogin: FormGroup;
-  public submitted = false;
   public error = '';
   public returnUrl: string;
   errorLogin = null;
   username: string;
+  subscriptions: Subscription[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -68,24 +68,8 @@ export class LoginPage implements OnInit {
 
 
   onSubmitLogin() {
-    this.submitted = true;
 
-    this.authService.login(this.formLogin.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          // console.log(data);
-          if (this.returnUrl) {
-            this.router.navigate([this.returnUrl]);
-          } else {
-            this.router.navigate(['/']);
-          }
-        },
-        error => {
-          this.error = error;
-          // this.loading = false;
-        });
-
+    this.subscriptions.push(this.authService.login(this.formLogin.value, this.returnUrl).subscribe())
   }
 
   async presentAlertPrompt() {
@@ -165,5 +149,8 @@ export class LoginPage implements OnInit {
     //     // this.loading = false;
     //   }
     // )
+  }
+  ngOnDestroy(){
+    this.subscriptions.map(v=> v.unsubscribe())
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter, OnInit } from '@angular/core';
 import { User, CurrentUser, SocialUser } from './interfaces/user';
 import { Router } from '@angular/router';
-import { map, tap, take } from 'rxjs/operators';
+import { map,take } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { getStorage, setStorage, removeStorage } from "src/app/shared/storage/services/storage.service";
@@ -156,7 +156,7 @@ export class AuthService implements OnInit {
 
 
 
-  login(credentials: User): Observable<CurrentUser> {
+  login(credentials: User, returnUrl): Observable<CurrentUser> {
     return this.http.post<CurrentUser>(`${environment.API}auth/login`, credentials)
       .pipe(
         map(user => {
@@ -172,6 +172,11 @@ export class AuthService implements OnInit {
             this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
             // this.router.navigate(['admin'])
             // console.log(user);
+            if (returnUrl) {
+              this.router.navigate([returnUrl]);
+            } else {
+              this.router.navigate(['/']);
+            }
 
           }
 
@@ -213,7 +218,7 @@ export class AuthService implements OnInit {
       .pipe(
         take(1)
       ).subscribe(
-        res => {
+        (res:any) => {
           console.log(res);
 
           let message, status;
@@ -236,7 +241,7 @@ export class AuthService implements OnInit {
         take(1)
       )
       .subscribe(
-        res => {
+        (res:any) => {
           console.log(res);
 
           let message, status;
