@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { AvatarSlidesComponent } from './avatar-slides.component';
@@ -7,7 +7,7 @@ describe('AvatarSlidesComponent', () => {
   let component: AvatarSlidesComponent;
   let fixture: ComponentFixture<AvatarSlidesComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AvatarSlidesComponent ],
       imports: [IonicModule.forRoot()]

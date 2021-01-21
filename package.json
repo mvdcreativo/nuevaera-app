@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@angular/animations": "~8.2.14",
     "@angular/cdk": "~8.2.3",
     "@angular/common": "~8.2.14",
@@ -23,6 +24,17 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "@capacitor-community/apple-sign-in": "^1.0.0",
+=======
+    "@angular/animations": "~11.0.9",
+    "@angular/cdk": "~11.0.4",
+    "@angular/common": "~11.0.9",
+    "@angular/core": "~11.0.9",
+    "@angular/forms": "~11.0.9",
+    "@angular/material": "^11.0.4",
+    "@angular/platform-browser": "~11.0.9",
+    "@angular/platform-browser-dynamic": "~11.0.9",
+    "@angular/router": "~11.0.9",
+>>>>>>> firebaseLogin
     "@capacitor/android": "^2.4.6",
     "@capacitor/core": "^2.4.6",
     "@capacitor/ios": "^2.4.5",
@@ -31,38 +43,43 @@
     "@ionic/angular": "^5.0.0",
     "@rdlabo/capacitor-facebook-login": "^2.0.3",
     "core-js": "^2.5.4",
+<<<<<<< HEAD
     "hammerjs": "^2.0.8",
     "rxjs": "~6.5.1",
     "scriptjs": "^2.5.9",
+=======
+    "firebase": "^8.2.3",
+    "rxjs": "~6.6.3",
+>>>>>>> firebaseLogin
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.20",
-    "@angular/cli": "~8.3.23",
-    "@angular/compiler": "~8.2.14",
-    "@angular/compiler-cli": "~8.2.14",
-    "@angular/language-service": "~8.2.14",
+    "@angular-devkit/build-angular": "~0.1100.7",
+    "@angular/cli": "~11.0.7",
+    "@angular/compiler": "~11.0.9",
+    "@angular/compiler-cli": "~11.0.9",
+    "@angular/language-service": "~11.0.9",
     "@capacitor/cli": "^2.4.6",
     "@ionic/angular-toolkit": "^2.1.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
-    "codelyzer": "^5.0.0",
+    "codelyzer": "^6.0.1",
     "husky": "^4.2.5",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.1.0",
+    "karma": "~5.1.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
     "prettier": "2.0.4",
     "pretty-quick": "^2.0.1",
-    "protractor": "~5.4.0",
+    "protractor": "~7.0.0",
     "ts-node": "~7.0.0",
-    "tslint": "~5.15.0",
-    "typescript": "~3.4.3"
+    "tslint": "~6.1.3",
+    "typescript": "~4.0.5"
   },
   "description": "Tienda de animales"
 }
