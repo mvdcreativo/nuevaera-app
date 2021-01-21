@@ -1,5 +1,5 @@
 {
-  "appId": "nuevaera.app",
+  "appId": "com.nuevaera.app",
   "appName": "Nueva Era",
   "bundledWebRuntime": false,
   "npmClient": "npm",
