@@ -20,18 +20,6 @@ export const environment = {
   urlFiles: 'https://api.nuevaerauruguay.com/storage/',
 
 
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  firebaseConfig : {
-    apiKey: "AIzaSyCzPXjxZP_VHCRvw6wFhIfImLlqwaYs6Qw",
-    authDomain: "nueva-era-web-ec472.firebaseapp.com",
-    databaseURL: "https://nueva-era-web-ec472.firebaseio.com",
-    projectId: "nueva-era-web-ec472",
-    storageBucket: "nueva-era-web-ec472.appspot.com",
-    messagingSenderId: "527065311839",
-    appId: "1:527065311839:web:6fa4b9666a3ca0704489ea",
-    measurementId: "G-S7Q1ZZ5EEW"
-  },
-
 };
 
 /*

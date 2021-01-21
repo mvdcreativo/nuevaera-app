@@ -4,13 +4,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from 'src/app/modules/auth/auth.service';
 import { AlertController } from '@ionic/angular';
-<<<<<<< HEAD
 import { Plugins } from '@capacitor/core';
 
 const { Device } = Plugins
-=======
 import { Subscription } from 'rxjs';
->>>>>>> firebaseLogin
 
 @Component({
   selector: 'app-login',
@@ -24,12 +21,9 @@ export class LoginPage implements OnInit, OnDestroy {
   public returnUrl: string;
   errorLogin = null;
   username: string;
-<<<<<<< HEAD
   platform: "ios" | "android" | "electron" | "web";
   osVersion: number;
-=======
-  subscriptions: Subscription[] = [];
->>>>>>> firebaseLogin
+  subscriptions: Subscription[]=[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -134,8 +128,28 @@ export class LoginPage implements OnInit, OnDestroy {
   /////login Social
   //APPLE
   signInApple() {
+    
+    this.authService.signApple(this.returnUrl).then(
+        data => {
+          console.log(data);
+          // if (this.returnUrl) {
+          //   this.router.navigate([this.returnUrl]);
+          // } else {
+          //   this.router.navigate(['/']);
+          // }
+        }
+      ).catch(
+        error => {
+          this.error = error;
+          // this.loading = false;
+        }
+      )
+  }
 
-  this.authService.signApple().then(
+
+  //GOOGLE
+  signInGoogle() {
+    this.authService.signInWithGoogle(this.returnUrl).then(
       data => {
         console.log(data);
         // if (this.returnUrl) {
@@ -152,43 +166,23 @@ export class LoginPage implements OnInit, OnDestroy {
     )
   }
 
-
-  //GOOGLE
-  signInGoogle() {
-    // this.authService.signInWithGoogle().then(
-    //   data => {
-    //     console.log(data);
-    //     if (this.returnUrl) {
-    //       this.router.navigate([this.returnUrl]);
-    //     } else {
-    //       this.router.navigate(['/']);
-    //     }
-    //   }
-    // ).catch(
-    //   error => {
-    //     this.error = error;
-    //     // this.loading = false;
-    //   }
-    // )
-  }
-
   //FACEBOOK
   signInFacebook(){
-    // this.authService.signInFacebook().then(
-    //   data => {
-    //     // console.log("data "+data);
-    //     if (this.returnUrl) {
-    //       this.router.navigate([this.returnUrl]);
-    //     } else {
-    //       this.router.navigate(['/']);
-    //     }
-    //   }
-    // ).catch(
-    //   error => {
-    //     this.error = error;
-    //     // this.loading = false;
-    //   }
-    // )
+    this.authService.signInFacebook(this.returnUrl).then(
+      data => {
+        // console.log("data "+data);
+        // if (this.returnUrl) {
+        //   this.router.navigate([this.returnUrl]);
+        // } else {
+        //   this.router.navigate(['/']);
+        // }
+      }
+    ).catch(
+      error => {
+        this.error = error;
+        // this.loading = false;
+      }
+    )
   }
   ngOnDestroy(){
     this.subscriptions.map(v=> v.unsubscribe())

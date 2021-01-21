@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import "@codetrix-studio/capacitor-google-auth";
 import { Plugins, registerWebPlugin } from '@capacitor/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 const { GoogleAuth } = Plugins;
 
 import {
@@ -44,7 +44,9 @@ export class AuthService implements OnInit {
     private router: Router,
     private http: HttpClient,
     public snackBar: MatSnackBar,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private alertController: AlertController
+
   ) {
     // ///facebook script web login
     // // This function initializes the FB variable
@@ -166,7 +168,7 @@ export class AuthService implements OnInit {
 
 
 
-  login(credentials: User, returnUrl): Observable<CurrentUser> {
+  login(credentials: User, returnUrl?): Observable<CurrentUser> {
     return this.http.post<CurrentUser>(`${environment.API}auth/login`, credentials)
       .pipe(
         map(user => {
@@ -301,12 +303,17 @@ export class AuthService implements OnInit {
   }
 
   /////LOGIN SOCIAL
-  private loginSocial(credentials){
+  private loginSocial(credentials, returnUrl?){
     console.log(JSON.stringify(credentials));
     
     this.http.post<any>(`${environment.API}social-auth`, credentials).
       subscribe(user => {
         
+        if(user.dataReturn){
+          this.alertEmailApple(user.dataReturn , returnUrl)
+          return 
+        }
+
         // login successful if there's a jwt token in the response
         if (user && user.token) {
           // store user details ands token in local storage to keep user logged in between page refreshes
@@ -318,6 +325,11 @@ export class AuthService implements OnInit {
           status = 'toastSuccess';
           this.snackBar.open(message, '×', { panelClass: [status], verticalPosition: 'top', duration: 500 });
           // this.router.navigate(['admin'])
+          if (returnUrl) {
+            this.router.navigate([returnUrl]);
+          } else {
+            this.router.navigate(['/']);
+          }
           
         }
         console.log(user);
@@ -329,7 +341,7 @@ export class AuthService implements OnInit {
       })
   }
   ///GOOGLE
-  async signInWithGoogle() {
+  async signInWithGoogle(returnUrl?) {
     let googleUser = await GoogleAuth.signIn();
     let credentials: any = {
       idToken: googleUser.authentication.idToken,
@@ -338,7 +350,7 @@ export class AuthService implements OnInit {
       
     };
     console.log(credentials);
-    this.loginSocial(credentials)
+    this.loginSocial(credentials,returnUrl)
     // console.log(this.user);
     // console.log(res);
 
@@ -350,7 +362,7 @@ export class AuthService implements OnInit {
 
 
   ////FACEBOOK
-  async signInFacebook(): Promise<void> {
+  async signInFacebook(returnUrl?): Promise<void> {
 
     const FACEBOOK_PERMISSIONS = ['email'];
     const facebookUser = await <FacebookLoginResponse>FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
@@ -365,7 +377,7 @@ export class AuthService implements OnInit {
       // Login successful.
       // console.log("token: "+facebookUser.accessToken);
       
-      this.loginSocial(credentials)
+      this.loginSocial(credentials, returnUrl)
     } else {
       // Cancelled by user.
       console.log("errorr: ")
@@ -375,7 +387,9 @@ export class AuthService implements OnInit {
 
 
   ////APPLE
-  async signApple(): Promise<void> {
+  async signApple(returnUrl?): Promise<void> {
+
+
     let options: SignInWithAppleOptions = {
       clientId: "com.nuevaera.app",
       redirectURI: "com.nuevaera.app",
@@ -386,12 +400,13 @@ export class AuthService implements OnInit {
     
     Plugins.SignInWithApple.authorize(options)
       .then((result: SignInWithAppleResponse) => {
+
         let credentials: any = {
           response: result.response,
           provider: "APPLE"
         };
         console.log(result);
-        this.loginSocial(credentials)
+        this.loginSocial(credentials, returnUrl)
 
       })
       .catch((error) => {
@@ -399,5 +414,46 @@ export class AuthService implements OnInit {
         
         // Handle error
       });
+  }
+
+
+  ////ALLERT SOLICITA MAIL APPLE
+  async alertEmailApple(item , returnUrl , animated:boolean = true) {
+
+    let alertEmailApple = await this.alertController.create({
+      mode:"ios",
+      header: 'Escribe tu email',
+      subHeader: 'Lo necesitamos para vincular tu usuario en nuestra web y las demás plataformas. Tus datos están protegidos y serán utilizados solamente para mejorar tu experiencia de usuario',
+      animated: animated,
+      inputs: [
+        {
+
+          name: 'email',
+          value: '',
+          type: 'email',
+          placeholder: 'Correo electrónico'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            
+          }
+        },
+        {
+          text: 'Aceptar',
+          // icon: 'close',
+          role: 'destructive',
+          handler: (inputs) => {
+            console.log(inputs);
+            item.response.email = inputs.email;
+            this.loginSocial(item, returnUrl)
+          }
+        }, 
+      ]
+    });
+    await alertEmailApple.present();
   }
 }
