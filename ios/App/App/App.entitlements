@@ -4,9 +4,12 @@
 <dict>
 	<key>aps-environment</key>
 	<string>development</string>
+<<<<<<< HEAD
+=======
 	<key>com.apple.developer.applesignin</key>
 	<array>
 		<string>Default</string>
 	</array>
+>>>>>>> 58cb7ef8b6ac41e24f9802801c56c49d838afe1c
 </dict>
 </plist>
