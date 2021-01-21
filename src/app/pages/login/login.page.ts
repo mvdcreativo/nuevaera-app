@@ -144,8 +144,8 @@ export class LoginPage implements OnInit {
   /////login Social
   //APPLE
   signInApple() {
-    
-    this.authService.signApple().then(
+
+  this.authService.signApple().then(
       data => {
         console.log(data);
         // if (this.returnUrl) {

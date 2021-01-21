@@ -373,18 +373,21 @@ export class AuthService implements OnInit {
   async signApple(): Promise<void> {
     let options: SignInWithAppleOptions = {
       clientId: "com.nuevaera.app",
-      redirectURI: "https://www.nuevaerauruguay.com/login",
-      
-      state: "12345",
-      nonce: "nonce",
+      redirectURI: "com.nuevaera.app",
+      scopes: "name email",
+      //state: "12345",
+      //nonce: "nonce",
     };
     
     Plugins.SignInWithApple.authorize(options)
       .then((result: SignInWithAppleResponse) => {
+        let credentials: any = {
+          response: result.response,
+          provider: "APPLE"
+        };
         console.log(result);
-        
-        // Handle user information
-        // Validate token with server and create new session
+        this.loginSocial(credentials)
+
       })
       .catch((error) => {
         console.log(error);
