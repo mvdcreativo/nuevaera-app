@@ -19,7 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		2DD5F56225B337490044F69C /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
+=======
+		2D8FBDBE25B544D6000840E2 /* App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
+>>>>>>> 58cb7ef8b6ac41e24f9802801c56c49d838afe1c
 		2DEF6B3625AD0F9500039A6F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
@@ -76,7 +80,11 @@
 		504EC3061FED79650016851F /* App */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				2DD5F56225B337490044F69C /* App.entitlements */,
+=======
+				2D8FBDBE25B544D6000840E2 /* App.entitlements */,
+>>>>>>> 58cb7ef8b6ac41e24f9802801c56c49d838afe1c
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
 				2DEF6B3625AD0F9500039A6F /* GoogleService-Info.plist */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,

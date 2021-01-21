@@ -10,9 +10,19 @@ import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import "@codetrix-studio/capacitor-google-auth";
-import { Plugins } from '@capacitor/core';
+import { Plugins, registerWebPlugin } from '@capacitor/core';
 import { NavController } from '@ionic/angular';
 const { GoogleAuth } = Plugins;
+
+import {
+  SignInWithApple,
+  SignInWithAppleOptions,
+  SignInWithAppleResponse,
+} from "@capacitor-community/apple-sign-in";
+
+registerWebPlugin(SignInWithApple);
+
+
 
 import { FacebookLoginResponse } from '@rdlabo/capacitor-facebook-login';
 const { FacebookLogin } = Plugins;
@@ -358,4 +368,31 @@ export class AuthService implements OnInit {
 
   }
 
+
+  ////APPLE
+  async signApple(): Promise<void> {
+    let options: SignInWithAppleOptions = {
+      clientId: "com.nuevaera.app",
+      redirectURI: "com.nuevaera.app",
+      scopes: "name email",
+      //state: "12345",
+      //nonce: "nonce",
+    };
+    
+    Plugins.SignInWithApple.authorize(options)
+      .then((result: SignInWithAppleResponse) => {
+        let credentials: any = {
+          response: result.response,
+          provider: "APPLE"
+        };
+        console.log(result);
+        this.loginSocial(credentials)
+
+      })
+      .catch((error) => {
+        console.log(error);
+        
+        // Handle error
+      });
+  }
 }
