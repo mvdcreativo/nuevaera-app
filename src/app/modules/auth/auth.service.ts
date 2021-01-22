@@ -1,8 +1,8 @@
 import { Injectable, EventEmitter, OnInit } from '@angular/core';
 import { User, CurrentUser, SocialUser } from './interfaces/user';
 import { Router } from '@angular/router';
-import { map,take } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { catchError, map,take } from 'rxjs/operators';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { getStorage, setStorage, removeStorage } from "src/app/shared/storage/services/storage.service";
 
@@ -48,6 +48,7 @@ export class AuthService implements OnInit {
     private alertController: AlertController
 
   ) {
+    
     // ///facebook script web login
     // // This function initializes the FB variable
     // (function (d, s, id) {
@@ -157,8 +158,9 @@ export class AuthService implements OnInit {
             this.currentUserSubject.next(user.user);
             // this.router.navigate(['admin'])
             // console.log(user);
-
+            
           }
+          this.errorSubject.next(null)
 
 
           return user;
@@ -191,9 +193,16 @@ export class AuthService implements OnInit {
             }
 
           }
+          this.errorSubject.next(null)
 
           return user;
         }),
+        catchError( error => {
+          if(error.error.message === "Unauthorized"){
+            this.errorSubject.next('Usuario o contraseña incorrectos')
+          }
+          return of(error)
+        })
       );
   }
 
@@ -305,14 +314,10 @@ export class AuthService implements OnInit {
   /////LOGIN SOCIAL
   private loginSocial(credentials, returnUrl?){
     console.log(JSON.stringify(credentials));
-    
+    this.errorSubject.next(null)
+
     this.http.post<any>(`${environment.API}social-auth`, credentials).
       subscribe(user => {
-        
-        if(user.dataReturn){
-          this.alertEmailApple(user.dataReturn , returnUrl)
-          return 
-        }
 
         // login successful if there's a jwt token in the response
         if (user && user.token) {
@@ -363,6 +368,7 @@ export class AuthService implements OnInit {
 
   ////FACEBOOK
   async signInFacebook(returnUrl?): Promise<void> {
+    this.errorSubject.next(null)
 
     const FACEBOOK_PERMISSIONS = ['email'];
     const facebookUser = await <FacebookLoginResponse>FacebookLogin.login({ permissions: FACEBOOK_PERMISSIONS });
@@ -388,7 +394,7 @@ export class AuthService implements OnInit {
 
   ////APPLE
   async signApple(returnUrl?): Promise<void> {
-
+    this.errorSubject.next(null)
 
     let options: SignInWithAppleOptions = {
       clientId: "com.nuevaera.app",
@@ -414,46 +420,5 @@ export class AuthService implements OnInit {
         
         // Handle error
       });
-  }
-
-
-  ////ALLERT SOLICITA MAIL APPLE
-  async alertEmailApple(item , returnUrl , animated:boolean = true) {
-
-    let alertEmailApple = await this.alertController.create({
-      mode:"ios",
-      header: 'Escribe tu email',
-      subHeader: 'Lo necesitamos para vincular tu usuario en nuestra web y las demás plataformas. Tus datos están protegidos y serán utilizados solamente para mejorar tu experiencia de usuario',
-      animated: animated,
-      inputs: [
-        {
-
-          name: 'email',
-          value: '',
-          type: 'email',
-          placeholder: 'Correo electrónico'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            
-          }
-        },
-        {
-          text: 'Aceptar',
-          // icon: 'close',
-          role: 'destructive',
-          handler: (inputs) => {
-            console.log(inputs);
-            item.response.email = inputs.email;
-            this.loginSocial(item, returnUrl)
-          }
-        }, 
-      ]
-    });
-    await alertEmailApple.present();
   }
 }

@@ -14,8 +14,8 @@ export class ErrorInterceptor implements HttpInterceptor {
         private authService: AuthService,
         private router: Router
         ) { }
-    retryDelay = 2000;
-    retryMaxAttempts = 2;
+    retryDelay = 500;
+    retryMaxAttempts = 1;
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request)
@@ -32,10 +32,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     if (err.status === 401) {
                         // auto logout if 401 response returned from api
                         // this.authService.logout();
-                        if(err.error.message === "Unauthorized"){
-                            this.authService.errorSubject.next('Usuario o contraseña incorrectos')
-                            console.log('Usuario o contraseña incorrectos');
-                        }
+
                         removeStorage('currentUser')
                     }
                     if (err.status === 401) {
