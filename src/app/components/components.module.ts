@@ -13,6 +13,7 @@ import { BrandsSlidesComponent } from './brand-slides/brands-slides.component';
 import { RouterModule } from '@angular/router';
 import { MercadopagoWebComponent } from './mercadopago-web/mercadopago-web.component';
 import { SkeletonListComponent } from './skeleton-list/skeleton-list.component';
+import { SplashComponent } from './splash/splash.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { SkeletonListComponent } from './skeleton-list/skeleton-list.component';
     BannerSlidesComponent,
     BrandsSlidesComponent,
     MercadopagoWebComponent,
-    SkeletonListComponent
+    SkeletonListComponent,
+    SplashComponent
   ],
   imports: [
     CommonModule,
@@ -41,8 +43,8 @@ import { SkeletonListComponent } from './skeleton-list/skeleton-list.component';
     BannerSlidesComponent,
     BrandsSlidesComponent,
     MercadopagoWebComponent,
-    SkeletonListComponent
-
+    SkeletonListComponent,
+    SplashComponent
   ]
 })
 export class ComponentsModule { }
