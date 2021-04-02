@@ -45,12 +45,7 @@ export class ProductService {
 
   public getProductByCategoryPaginate(category,page)  : Observable<Paginate> {
 
-    return this._http.get<Paginate>(`${environment.API}product-by-category/${category}?page=${page}`).pipe(
-      map( x => {
-        x.data.filter( v=> v.status !== "DIS")
-        return x
-      })
-    )
+    return this._http.get<Paginate>(`${environment.API}product-by-category/${category}?page=${page}`)
   }
   
   public getProductByBrandPaginate(brand,page) : Observable<Paginate> {
@@ -66,12 +61,7 @@ export class ProductService {
   //////SEARCHER/////
   public searchProduct(data: any, page) : Observable<Paginate> {
     
-    return this._http.get<Paginate>(`${environment.API}search-paginate/${data}?page=${page}`).pipe(
-      map( x => {
-        x.data.filter( v=> v.status !== "DIS")
-        return x
-      })
-    )
+    return this._http.get<Paginate>(`${environment.API}search-paginate/${data}?page=${page}`)
     // return this.products.find(product=> product.id === id);
 
     // return this.httpClient.get<Product>(this._url + 'product-' + id + '.json');

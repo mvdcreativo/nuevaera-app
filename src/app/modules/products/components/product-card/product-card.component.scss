@@ -31,12 +31,26 @@ ion-thumbnail{
     color: #3dc2ff!important;
     width: 80%;
 }
+.sugerido{
+    color: #919191!important;
+    width: 80%;
+}
+.price-old{
+    text-decoration:line-through; 
+    color:#ccc;
+    font-size: 14px;
+}
+.discount{
+    text-decoration: inherit;
+    color: #39b54a;
+}
 .actions{
     position: absolute;
     right: 16px;
     bottom: 10px;
     font-size: 12px;
 }
+
 ion-label{
     outline:none!important;
 }

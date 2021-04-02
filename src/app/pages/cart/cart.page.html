@@ -19,8 +19,15 @@
       </ion-thumbnail>
       <ion-label>
         <p>{{ item.product.name }}</p>
-        <p class="detalles"><span class="qty ion-padding">{{ item.quantity }} uni.</span> <span class="price">$U
-            {{ item.product.price | number }}</span></p>
+        <p class="detalles">
+          <span class="qty ion-padding">{{ item.quantity }} uni.</span> 
+          <span  *ngIf="user?.role !=='UMAY'" class="price">$U
+            {{ calculoDesc(item.product?.price , item.product?.discount, user?.discount) }}
+          </span>
+          <span  *ngIf="user?.role ==='UMAY'" class="price">$U
+            {{ calculoDesc(item.product?.price_mayorista  || item.product?.pricee , item.product?.discount, user?.discount) }}
+          </span>
+        </p>
       </ion-label>
       <ion-buttons class="actions ">
 

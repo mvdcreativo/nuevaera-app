@@ -48,3 +48,21 @@ ion-item{
     --border-style: solid;
     --border-width:1px;
 }
+
+.sugerido{
+    color: #919191!important;
+    // width: 80%;
+    float: right;
+    
+}
+.price-old{
+    text-decoration:line-through; 
+    color:#ccc;
+    font-size: 14px;
+    
+}
+.discount{
+    text-decoration: inherit;
+    color: #39b54a;
+   
+}

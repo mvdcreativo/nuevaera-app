@@ -73,12 +73,22 @@ export class DataOrderPage implements OnInit {
 
   onSubmit() {
 
-    const dataProduct = this.buyProducts.map(
-      value => {
-        const a = {[value.product.id] : { quantity: value.quantity, price: value.product.price }}
-        return a
-      }
-    )
+    if(this.user?.role === 'UMAY'){
+      var dataProduct = this.buyProducts.map(
+        value => {
+          const a = { [value.product.id]: { quantity: value.quantity, price: value.product?.price_mayorista ? value.product?.price_mayorista : value.product?.price , discount_user: this.user.discount, discount_product: value.product?.discount} }
+          return a
+        }
+      )
+    }else{
+      var dataProduct = this.buyProducts.map(
+        value => {
+          const a = { [value.product.id]: { quantity: value.quantity, price: value.product?.price , discount_user: this.user.discount, discount_product: value.product?.discount} }
+          return a
+        }
+      )
+      
+    }
 
     let dataForm = this.formOrder.value
     dataForm.total = this.amount,
@@ -91,7 +101,11 @@ export class DataOrderPage implements OnInit {
         console.log(res);
         
         //redirecciono a url de pagos en API y a su vez redirecciona a mercadopago////
-        location.href= `${environment.urlPago}/${id}`
+        if(this.user.role === "UMAY"){
+          this.router.navigate(['/orders-list'])
+        }else{
+          location.href = `${environment.urlPago}/${id}`
+        }
 
         localStorage.removeItem('cartItem');
         // this.router.navigate(['/pages/metodos-de-pago/', id ])

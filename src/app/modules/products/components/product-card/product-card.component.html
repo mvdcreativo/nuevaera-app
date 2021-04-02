@@ -9,21 +9,54 @@
   
   </ion-card-content>
 </ion-card> -->
+<ion-item color="light" lines="none">
+  <ion-thumbnail slot="start" detail [routerLink]="['/product-detail', data.id]">
+    <ion-img [src]="urlFiles+data.picture"></ion-img>
+  </ion-thumbnail>
+  <ion-label [routerLink]="['/product-detail', data.id]">
 
-    <ion-item color="light" lines="none" >
-      <ion-thumbnail slot="start" detail  [routerLink]="['/product-detail', data.id]">
-        <ion-img [src]="urlFiles+data.picture"></ion-img>
-      </ion-thumbnail>
-      <ion-label [routerLink]="['/product-detail', data.id]" >
-        <p class="title">{{ data.name }}</p>
-        <p *ngIf="data.brand">{{ data.brand.name }}</p>
-        <p class="price">$U {{ data.price }}</p>
-      </ion-label>
-      <ion-buttons class="actions">
-        <ion-chip color="warning" (click)="addToCart(data)">
-          <mat-icon class="material-icons-round">add_shopping_cart</mat-icon>
-          <!-- <ion-label>Default</ion-label> -->
-        </ion-chip>
-      </ion-buttons>
-    </ion-item>
+    <ng-container *ngIf="user?.role === 'UMAY'; else elseTemplate">
+      <p class="title">{{ data.name }}</p>
+      <p *ngIf="data.brand">{{ data.brand.name }}</p>
+      <p *ngIf="data.discount">
+        <span class="price-old">$U {{data?.price_mayorista || data?.price }}</span>
+        <span class="discount">
+          {{data.discount }}% OFF
+        </span>
+      </p>
+      
+      <p *ngIf="user?.discount">
+        <span class="discount">
+          -{{ user?.discount }}% OFF Solo para ti.
+        </span>
+      </p>
+      <p class="sugerido">Sugerido $U {{ calculoDesc(data?.price ,data.discount, user?.discount)}}</p>
+      <p class="price">$U {{ calculoDesc(data?.price_mayorista  || data?.price , data.discount, user?.discount) }}</p>
+    </ng-container>
 
+    <ng-template #elseTemplate>
+      <p class="title">{{ data.name }}</p>
+      <p *ngIf="data.brand">{{ data.brand.name }}</p>
+      <p *ngIf="data.discount">
+        <span class="price-old">$U {{data?.price }}</span>
+        <span class="discount">
+          {{data.discount }}% OFF
+        </span>
+      </p>
+      
+      <p *ngIf="user?.discount">
+        <span class="discount">
+          -{{ user?.discount }}% OFF Solo para ti.
+        </span>
+      </p>
+      <p class="price">$U {{ calculoDesc(data?.price , data.discount, user?.discount) }}</p>
+    </ng-template>
+
+  </ion-label>
+  <ion-buttons class="actions">
+    <ion-chip color="warning" (click)="addToCart(data)">
+      <mat-icon class="material-icons-round">add_shopping_cart</mat-icon>
+      <!-- <ion-label>Default</ion-label> -->
+    </ion-chip>
+  </ion-buttons>
+</ion-item>
