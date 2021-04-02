@@ -8,7 +8,40 @@
       <ion-label>
         <p class="title">{{ slide.name }}</p>
         <p *ngIf="slide.brand">{{ slide.brand.name }}</p>
-        <ion-text class="price" color="secondary">$U {{ slide.price }}</ion-text>
+
+        <ng-container *ngIf="user?.role === 'UMAY'; else elseTemplate">
+          <p *ngIf="slide.discount">
+            <span class="price-old">$U {{slide?.price_mayorista || slide?.price }}</span>
+            <span class="discount">
+              {{slide.discount }}% OFF
+            </span>
+          </p>
+          
+          <p *ngIf="user?.discount">
+            <span class="discount">
+              -{{ user?.discount }}% OFF Solo para ti.
+            </span>
+          </p>
+          <p class="" color="secondary">Sugerido $U {{ calculoDesc(slide?.price ,slide.discount, user?.discount)}}</p>
+          <ion-text class="price" color="secondary">$U {{ calculoDesc(slide?.price_mayorista || slide?.price ,slide.discount, user?.discount) }}</ion-text>
+        </ng-container>
+
+        <ng-template #elseTemplate>
+          <p *ngIf="slide.discount">
+            <span class="price-old">$U {{slide?.price }}</span>
+            <span class="discount">
+              {{slide.discount }}% OFF
+            </span>
+          </p>
+          
+          <p *ngIf="user?.discount">
+            <span class="discount">
+              -{{ user?.discount }}% OFF Solo para ti.
+            </span>
+          </p>
+          <ion-text class="price" color="secondary">$U {{ calculoDesc(slide?.price ,slide.discount, user?.discount) }}</ion-text>
+        </ng-template>
+        
       </ion-label>
     </ion-item>
 

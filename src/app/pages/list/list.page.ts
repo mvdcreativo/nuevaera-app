@@ -10,8 +10,8 @@ import { IonInfiniteScroll } from '@ionic/angular';
   styleUrls: ['./list.page.scss'],
 })
 export class ListPage implements OnInit {
-  @ViewChild(IonInfiniteScroll) infiniteScroll : IonInfiniteScroll
-    
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll
+
   products: Product[] = [];
   totalProduct: number = 0;
   currentPage: number = 0;
@@ -20,6 +20,7 @@ export class ListPage implements OnInit {
   brand: any;
   search: any;
   sinResultados: string;
+  nextPage: number = 0;
 
 
   constructor(
@@ -31,19 +32,19 @@ export class ListPage implements OnInit {
 
     this.route.params.subscribe(
       (params: Params) => {
-        console.log(params);
-        
-        if(Object.keys(params).length !== 0 ){
-          console.log(params);
-          
+        // console.log(params);
+
+        if (Object.keys(params).length !== 0) {
+          // console.log(params);
+
           this.navegaConParametros(params);
 
-        }else{
+        } else {
           ///Buscador
 
           this.navegaConQueryParams()
-          console.log(params);
-          
+          // console.log(params);
+
 
         }
       }
@@ -53,67 +54,68 @@ export class ListPage implements OnInit {
 
 
 
-  navegaConParametros(params){
-    if(params['marca']){
+  navegaConParametros(params) {
+    if (params['marca']) {
       this.brand = params['marca'];
       this.brands(this.brand);
-      
-    }else{
+
+    } else {
       this.category = params['category'];
       this.categories(this.category);
     }
   }
 
-  navegaConQueryParams(){
+  navegaConQueryParams() {
 
-  this.route.queryParamMap.subscribe(
-    (params:Params) => {
-      if(params.params.buscando){
-        console.log(params.params);
-        this.products = []
-        this.currentPage = 0
-        
-        this.search = params.params.buscando
-        this.searcher(this.search)
+    this.route.queryParamMap.subscribe(
+      (params: Params) => {
+        if (params.params.buscando) {
+          // console.log(params.params);
+          this.products = []
+          this.currentPage = 0
 
-        
-      }else{
+          this.search = params.params.buscando
+          this.searcher(this.search)
+
+
+        } else {
+        }
       }
-    }
-  )
+    )
   }
 
 
 
-  categories(category){
+  categories(category) {
     const page = this.currentPage + 1;
-
-    this.productService.getProductByCategoryPaginate(category,page).subscribe(
-      (res:any) => {
-        console.log(res.data);
+    // console.log(page);
+    
+    this.productService.getProductByCategoryPaginate(category, page).subscribe(
+      (res: any) => {
+        // console.log(res.data);
         this.agregaDatos(res)
         // this.getTags(products)
         // this.getColors(products)
-    })
+      })
   }
 
-  brands(brands){
+  brands(brands) {
     const page = this.currentPage + 1
     this.productService.getProductByBrandPaginate(brands, page).subscribe(
-      (res:any) => {
+      (res: any) => {
 
         this.agregaDatos(res)
 
-    })
+      })
   }
 
-  searcher(params){
+  searcher(params) {
     console.log(params);
-    
+
     const page = this.currentPage + 1
     this.productService.searchProduct(params, page).subscribe(
-      (res:any)=> {
-        console.log(res);
+      (res: any) => {
+        // console.log(res);
         // this.allItems = res
         this.agregaDatos(res)
       }
@@ -121,43 +123,43 @@ export class ListPage implements OnInit {
   }
 
 
- private agregaDatos(res){
-   if(res.data.length >=1){
-     this.products.push(...res.data);
-     this.infiniteScroll.disabled = false
-     this.totalProduct = res.total
-     this.currentPage = res.current_page
-     this.lastPage= res.last_page
- 
-     console.log(this.totalProduct);
-     console.log(this.currentPage);
-     console.log(this.lastPage);
- 
-     if(this.lastPage === this.currentPage){
-       this.infiniteScroll.complete();
-       this.infiniteScroll.disabled = true
-     }
-     this.infiniteScroll.complete();
-     this.sinResultados = null
-   }else{
-     this.sinResultados = "No hay productos"
-   }
+  private agregaDatos(res) {
+    if (res.data.length >= 1) {
+      this.products.push(...res.data);
+      this.totalProduct = res.total
+      this.currentPage = res.current_page
+      this.lastPage = res.last_page
+      
+      // console.log(this.totalProduct);
+      // console.log(this.currentPage);
+      // console.log(this.lastPage);
+      
+      if (this.lastPage === this.currentPage) {
+        this.infiniteScroll.complete();
+        this.infiniteScroll.disabled = true
+      }
+      this.infiniteScroll ? this.infiniteScroll.disabled = false : null
+      this.infiniteScroll ? this.infiniteScroll.complete() : null;
+      this.sinResultados = null
+    } else {
+      this.sinResultados = "No hay productos"
+    }
 
- }
+  }
 
 
 
-  loadData(e){
-    if(this.category){
+  loadData(e) {
+    if (this.category) {
       this.categories(this.category)
     }
-    if(this.brand){
+    if (this.brand) {
       this.brands(this.brand)
     }
-    if(this.search){
+    if (this.search) {
       this.searcher(this.search)
     }
 
   }
-  
+
 }

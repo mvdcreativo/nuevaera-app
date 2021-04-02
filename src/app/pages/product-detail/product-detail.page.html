@@ -15,7 +15,39 @@
       </ion-card-header>
       <ion-card-content class="card-content ion-no-padding ion-padding-bottom">
 
-        <p class="price ion-padding-bottom">$ {{ product.price }}</p>
+        <ng-container *ngIf="user?.role === 'UMAY'; else elseTemplate">
+          <p *ngIf="product.discount">
+            <span class="price-old">$U {{product?.price_mayorista || product?.price }}</span>
+            <span class="discount">
+              {{product.discount }}% OFF
+            </span>
+          </p>
+          
+          <p *ngIf="user?.discount">
+            <span class="discount">
+              -{{ user?.discount }}% OFF Solo para ti.
+            </span>
+          </p>
+          <p class="sugerido">Sugerido $U {{ calculoDesc(product?.price ,product.discount, user?.discount  | number)}}</p>
+          <p class="price ion-padding-bottom">$U {{ calculoDesc(product?.price_mayorista  || product?.price , product.discount, user?.discount) | number }}</p>
+        </ng-container>
+
+        <ng-template #elseTemplate>
+          <p *ngIf="product.discount">
+            <span class="price-old">$U {{product?.price }}</span>
+            <span class="discount">
+              {{product.discount }}% OFF
+            </span>
+          </p>
+          
+          <p *ngIf="user?.discount">
+            <span class="discount">
+              -{{ user?.discount }}% OFF Solo para ti.
+            </span>
+          </p>
+          <p class="price ion-padding-bottom">$U {{ calculoDesc(product?.price , product?.discount, user?.discount)}} </p>
+        </ng-template>
+
 
         <ion-buttons class="actions ion-padding-bottom">
           <ion-chip color="warning" (click)="addToCart(product)">

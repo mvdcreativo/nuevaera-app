@@ -4,4 +4,6 @@ import { Product } from 'src/app/interfaces/product';
 export interface CartItem {
   product: Product;
   quantity: number;
+  discount_product?: number;
+  discount_user?:number;
 }

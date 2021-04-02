@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Product } from 'src/app/interfaces/product';
 import { Router } from '@angular/router';
+import { User } from 'src/app/modules/auth/interfaces/user';
+import { AuthService } from 'src/app/modules/auth/auth.service';
 
 @Component({
   selector: 'ofers-slides',
@@ -16,11 +18,15 @@ export class OfersSlidesComponent implements OnInit {
   public urlFiles: string = environment.urlFiles;
 
 
-  
+  user: User;
+
 
   constructor(
-    private router : Router
-  ) { }
+    private router : Router,
+    private authService: AuthService
+  ) {
+    this.user = this.authService.currentUserValue?.user
+   }
 
   ngOnInit() 
   {
@@ -29,4 +35,16 @@ export class OfersSlidesComponent implements OnInit {
     this.router.navigate(['/product-detail' , id])
   }
 
+
+  calculoDesc(price , descuentoProduct, dUser?){
+    const descuentoP = (price * descuentoProduct) / 100;
+    const pricePublico = price - descuentoP;
+  
+    if(dUser){
+      const descuentUser = (pricePublico * dUser) / 100;
+      return pricePublico - descuentUser;
+    }
+  
+    return pricePublico
+  }
 }

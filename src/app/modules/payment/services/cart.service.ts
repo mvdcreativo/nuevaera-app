@@ -1,10 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Observable, BehaviorSubject, Subscriber } from 'rxjs';
 import { CartItem } from '../interfaces/cart-item';
 import { Product } from 'src/app/interfaces/product';
 import { getStorage, setStorage, removeStorage } from "src/app/shared/storage/services/storage.service";
+import { AuthService } from '../../auth/auth.service';
+import { User } from '../../auth/interfaces/user';
 
 
 
@@ -18,9 +20,11 @@ export class CartService implements OnInit {
 public cartItems  :  BehaviorSubject<CartItem[]> = new BehaviorSubject([]) 
 public observer   :  Subscriber<{}>;
   products:any;
+  user: User;
 
   constructor(
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private authService: AuthService
     ) {
   
       getStorage('cartItem').then(res => {
@@ -57,6 +61,11 @@ ngOnInit(){
 
    // Add to cart
    public addToCart(product: Product, quantity: number) {
+    this.authService.currentUser.pipe(take(1)).subscribe(
+      res => {
+        this.user = res?.user
+      }
+    )
     let message, status;
      var item: CartItem | boolean = false;
      // If Products exist
@@ -65,6 +74,8 @@ ngOnInit(){
          let qty = this.products[index].quantity + quantity;
          let stock = this.calculateStockCounts(this.products[index], quantity);
          if(qty != 0 && stock) {
+          this.products[index]['discount_user'] = this.user?.discount || 0
+          this.products[index]['discount_product'] = product?.discount
            this.products[index]['quantity'] = qty;
            message = 'El producto ' + product.name + ' se agrego tu carrito';
            status = 'toastSuccess';
@@ -76,7 +87,7 @@ ngOnInit(){
 
      // If this.Products does not exist (Add New this.Products)
      if(!hasItem) {
-      item = { product: product, quantity: quantity };
+      item = { product: product, quantity: quantity, discount_user: this.user?.discount  || 0, discount_product: product?.discount };
       this.products.push(item);
       message = 'El producto ' + product.name + ' se agrego tu carrito';
       status = 'toastSuccess';
@@ -113,14 +124,35 @@ public removeFromCart(item: CartItem) {
 
 // Total amount
 public getTotalAmount(): Observable<number> {
+  this.authService.currentUser.pipe(take(1)).subscribe(
+    res => {
+      this.user = res?.user
+    }
+  )
   return this.cartItems.pipe(map((product: CartItem[]) => {
     if(this.products){
       return this.products.reduce((prev, curr: CartItem) => {
-        return prev + curr.product.price * curr.quantity;
+        if(this.user?.role === 'UMAY'){
+          return prev + this.calculoDesc(curr.product?.price_mayorista  || curr.product?.price, curr.product?.discount, this.user?.discount) * curr.quantity;
+        }else{
+          return prev + this.calculoDesc(curr.product.price, curr.product?.discount, this.user?.discount) * curr.quantity;
+        }
       }, 0);
 
     }
   }));
+}
+
+calculoDesc(price , descuentoProduct, dUser?){
+  const descuentoP = (price * descuentoProduct) / 100;
+  const pricePublico = price - descuentoP;
+
+  if(dUser){
+    const descuentUser = (pricePublico * dUser) / 100;
+    return pricePublico - descuentUser;
+  }
+
+  return pricePublico
 }
 
 // Update Cart Value

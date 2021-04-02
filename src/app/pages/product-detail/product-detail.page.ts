@@ -4,6 +4,8 @@ import { ProductService } from 'src/app/modules/products/services/product.servic
 import { Product } from 'src/app/interfaces/product';
 import { environment } from 'src/environments/environment';
 import { CartService } from 'src/app/modules/payment/services/cart.service';
+import { User } from 'src/app/modules/auth/interfaces/user';
+import { AuthService } from 'src/app/modules/auth/auth.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -13,12 +15,17 @@ import { CartService } from 'src/app/modules/payment/services/cart.service';
 export class ProductDetailPage implements OnInit {
   product: Product;
   public urlFiles: string = environment.urlFiles;
-
+  user: User;
+  
   constructor(
     private activateRoute: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
-  ) { }
+    private cartService: CartService,
+    private authService: AuthService
+  ) {
+    this.user = this.authService.currentUserValue?.user
+
+   }
 
   ngOnInit() {
     this.activateRoute.paramMap.subscribe(
@@ -40,5 +47,19 @@ export class ProductDetailPage implements OnInit {
       this.cartService.addToCart(product, quantity);
       console.log(product, quantity);
     }
+
+
+    calculoDesc(price , descuentoProduct, dUser?){
+      const descuentoP = (price * descuentoProduct) / 100;
+      const pricePublico = price - descuentoP;
+    
+      if(dUser){
+        const descuentUser = (pricePublico * dUser) / 100;
+        return pricePublico - descuentUser;
+      }
+    
+      return pricePublico
+    }
+  
 
 }

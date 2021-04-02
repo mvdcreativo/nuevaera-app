@@ -6,6 +6,7 @@ export class Product {
     price?: number;
     salePrice?: number;
     discount?: number;
+    price_mayorista?: number;
     picture?: string;
     shortDetails?: string;
     description?: string;

@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { CartItem } from 'src/app/modules/payment/interfaces/cart-item';
 import { environment } from 'src/environments/environment';
 import { ActionSheetController } from '@ionic/angular';
+import { AuthService } from 'src/app/modules/auth/auth.service';
+import { User } from 'src/app/modules/auth/interfaces/user';
 
 @Component({
   selector: 'app-cart',
@@ -14,11 +16,16 @@ export class CartPage implements OnInit {
   public cartItems : Observable<CartItem[]> = of([]);
   public shoppingCartItems  : CartItem[] = [];
   urlFiles: string = environment.urlFiles;
+  user: User;
 
   constructor(
     private cartService: CartService,
     public actionSheetController: ActionSheetController,
-  ) { }
+    private authService: AuthService
+  ) { 
+    this.user = this.authService.currentUserValue?.user
+
+  }
 
   ngOnInit() {
     this.cartItems = this.cartService.getItems();
@@ -108,5 +115,15 @@ export class CartPage implements OnInit {
   }
 
 
+  calculoDesc(price , descuentoProduct, dUser?){
+    const descuentoP = (price * descuentoProduct) / 100;
+    const pricePublico = price - descuentoP;
   
+    if(dUser){
+      const descuentUser = (pricePublico * dUser) / 100;
+      return pricePublico - descuentUser;
+    }
+  
+    return pricePublico
+  }
 }

@@ -20,12 +20,13 @@ export class OrdersListPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    const pageSize = {pageSize: "5"}
+    const pageSize = {pageSize: "10"}
     this.orderService.getOrders(pageSize).subscribe(
       (res:any)=>{
         if(res.data.length >=1){
           this.orders = res.data
-
+          // console.log(res.data);
+          
         }else{
           this.orders = []
         }

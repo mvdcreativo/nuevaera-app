@@ -1,0 +1,68 @@
+
+* {
+    --time : 1000ms;
+
+}
+.splash{
+    background:white;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+}
+.box {
+    margin: 0;
+    // height: 100vh;
+    width: 100%;
+    height: 50vh;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 0 50px 50px;
+    background: #FFE20D;
+    
+    animation-name: run;
+    animation-duration: var(--time);
+    animation-timing-function:ease-in;
+    position: relative;
+    // animation-delay: 2s;
+    // animation-iteration-count: infinite;
+}
+.logo{
+    width: 80vw;
+    margin: auto;
+    height: 25vw;
+    background-image: url('../../../assets/logo.svg');
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: center ;
+    padding: 1rem;
+    border-radius: 50px;
+    background-color: white;
+    background-size: contain;
+    margin-top: 45vh;
+
+    animation-name: logo;
+    // animation-delay: var(--time);
+    animation-duration: calc(var(--time) + 1000ms);
+}
+
+
+
+
+ @keyframes run {
+    0% {top: -50px; height: 0vh; width: 0%;  border-radius: 0 0 50% 50%; }
+    50% {width: 100%; border-radius: 0 0 50% 50%;}
+    70% {height: 100vh; width: 100%;  border-radius: 0 }
+    80% {height: 40vh; width: 100%; border-radius: 0 0 50px 50px;}
+    90% {height: 55vh; width: 100%;}
+    100% {height: 50vh; width: 100%;}
+}
+
+@keyframes logo {
+    0% {top: 25vw; height: 0; width: 0; padding: 0;}
+    80% {margin-top: 70vh; height: 0; width: 0; padding: 0; border-radius: 50%;}
+    100% { height: 25vw; width: 80vw;}
+
+}
