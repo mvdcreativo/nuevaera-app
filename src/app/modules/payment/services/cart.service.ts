@@ -1,4 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map, take } from 'rxjs/operators';
 import { Observable, BehaviorSubject, Subscriber } from 'rxjs';
@@ -7,6 +9,7 @@ import { Product } from 'src/app/interfaces/product';
 import { getStorage, setStorage, removeStorage } from "src/app/shared/storage/services/storage.service";
 import { AuthService } from '../../auth/auth.service';
 import { User } from '../../auth/interfaces/user';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -21,15 +24,16 @@ public cartItems  :  BehaviorSubject<CartItem[]> = new BehaviorSubject([])
 public observer   :  Subscriber<{}>;
   products:any;
   user: User;
+  productsOk: Product[];
 
   constructor(
     public snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient
     ) {
   
       getStorage('cartItem').then(res => {
-        this.cartItems.next(res || [] )
-        this.products = this.cartItems.value
+        this.checkProducts(res)
         // console.log(res);
         
       })
@@ -45,18 +49,14 @@ public observer   :  Subscriber<{}>;
 
 
 ngOnInit(){
-  console.log(this.products);
+  // console.log(this.products);
   
 }
 
 //     // Get Products
   public getItems(): Observable<CartItem[]> {
     return this.cartItems
-    // const itemsStream = new Observable(observer => {
-    //   observer.next(this.products);
-    //   observer.complete();
-    // });
-    // return <Observable<CartItem[]>>itemsStream;
+
   }
 
    // Add to cart
@@ -100,6 +100,10 @@ ngOnInit(){
 
    }
 
+
+   setCartEmpty(){
+    setStorage("cartItem", []);
+   }
 // Calculate Product stock Counts
 public calculateStockCounts(product: CartItem, quantity): CartItem | Boolean {
   let message, status;
@@ -169,4 +173,44 @@ public updateCartQuantity(product: Product, quantity: number): CartItem | boolea
   });
 }
 
+
+  public checkProductsCart(products_ids){
+
+    return this.http.get<Product[]>(`${environment.API}products-by-ids?ids=${products_ids}`).pipe(
+      take(1)
+    )
+  }
+
+
+
+  checkProducts(shoppingCartItems){
+    
+    const ids = shoppingCartItems.map( v => v.product.id)
+    // console.log(ids);
+    this.checkProductsCart(ids).subscribe(res=> {
+      res.length >= 1 ? this.productsOk = res : this.productsOk =[]
+      // console.log(this.productsOk);
+      
+      
+      const cartItems = shoppingCartItems.filter( v=>{
+          
+          const productOk = this.productsOk.find(x=> x.id === v.product.id)
+
+          if(productOk.status !=="DIS" && productOk.status !=="STK"){
+            v.product = productOk
+
+            return v;
+          }
+          return false
+      })
+      this.cartItems.next(cartItems || [] )
+      setStorage("cartItem", cartItems);
+      this.products = this.cartItems.value
+      // this.shoppingCartItems = cartItems
+      console.log(cartItems);
+      
+    })
+    
+
+  }
 }

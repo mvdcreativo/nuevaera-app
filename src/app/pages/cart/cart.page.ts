@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { ActionSheetController } from '@ionic/angular';
 import { AuthService } from 'src/app/modules/auth/auth.service';
 import { User } from 'src/app/modules/auth/interfaces/user';
+import { Product } from 'src/app/interfaces/product';
 
 @Component({
   selector: 'app-cart',
@@ -17,6 +18,7 @@ export class CartPage implements OnInit {
   public shoppingCartItems  : CartItem[] = [];
   urlFiles: string = environment.urlFiles;
   user: User;
+  productsOk: Product[];
 
   constructor(
     private cartService: CartService,
@@ -30,9 +32,11 @@ export class CartPage implements OnInit {
   ngOnInit() {
     this.cartItems = this.cartService.getItems();
     this.cartItems.subscribe(shoppingCartItems => {
-      console.log(shoppingCartItems);
-      
-      return this.shoppingCartItems = shoppingCartItems;
+      if(shoppingCartItems.length >= 1 ){
+        this.shoppingCartItems = shoppingCartItems 
+        // this.checkProducts(shoppingCartItems)
+      }
+
     });
 
   }
@@ -54,7 +58,7 @@ export class CartPage implements OnInit {
     this.cartService.updateCartQuantity(product,quantity);
   }
    // Get Total
-   public getTotal(): Observable<number> {
+  public getTotal(): Observable<number> {
     return this.cartService.getTotalAmount();
   }
 
@@ -126,4 +130,7 @@ export class CartPage implements OnInit {
   
     return pricePublico
   }
+
+
+
 }
