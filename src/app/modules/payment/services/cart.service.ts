@@ -22,7 +22,7 @@ export class CartService implements OnInit {
 // Array
 public cartItems  :  BehaviorSubject<CartItem[]> = new BehaviorSubject([]) 
 public observer   :  Subscriber<{}>;
-  products:any;
+  products:any = [];
   user: User;
   productsOk: Product[];
 
@@ -32,8 +32,14 @@ public observer   :  Subscriber<{}>;
     private http: HttpClient
     ) {
   
-      getStorage('cartItem').then(res => {
-        this.checkProducts(res)
+      getStorage('cartItem').then((res:[]) => {
+        if(res?.length >= 1){
+          this.checkProducts(res)
+
+        }else{
+          setStorage("cartItem", []);
+
+        }
         // console.log(res);
         
       })
@@ -60,7 +66,7 @@ ngOnInit(){
   }
 
    // Add to cart
-   public addToCart(product: Product, quantity: number) {
+  public addToCart(product: Product, quantity: number) {
     this.authService.currentUser.pipe(take(1)).subscribe(
       res => {
         this.user = res?.user
@@ -69,7 +75,7 @@ ngOnInit(){
     let message, status;
      var item: CartItem | boolean = false;
      // If Products exist
-     let hasItem = this.products.find((items, index) => {
+     let hasItem = this.products?.find((items, index) => {
        if(items.product.id == product.id) {
          let qty = this.products[index].quantity + quantity;
          let stock = this.calculateStockCounts(this.products[index], quantity);
@@ -94,8 +100,7 @@ ngOnInit(){
       this.snackBar.open(message, '', { panelClass: [status], verticalPosition: 'top', duration: 500 });
     }
   
-
-     setStorage("cartItem", this.products);
+    this.checkProducts(this.products)
      return item;
 
    }
@@ -190,7 +195,6 @@ public updateCartQuantity(product: Product, quantity: number): CartItem | boolea
     this.checkProductsCart(ids).subscribe(res=> {
       res.length >= 1 ? this.productsOk = res : this.productsOk =[]
       // console.log(this.productsOk);
-      
       
       const cartItems = shoppingCartItems.filter( v=>{
           

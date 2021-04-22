@@ -62,9 +62,6 @@ export class CartPage implements OnInit {
     return this.cartService.getTotalAmount();
   }
 
-
-
-
   async presentActionSheet(item,animated:boolean = true) {
     let actionSheet = await this.actionSheetController.create({
       mode:"ios",
